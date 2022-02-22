@@ -12,27 +12,15 @@
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController storyboardIdentifier="Profile" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="ProfileViewController" customModule="Navigation" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc" customClass="ProfileView" customModule="Navigation" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QKd-vE-4m3" customClass="ProfileView" customModule="Navigation" customModuleProvider="target">
-                                <rect key="frame" x="10" y="10" width="300" height="548"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="QKd-vE-4m3" secondAttribute="bottom" constant="10" id="aKQ-Cg-kMs"/>
-                            <constraint firstItem="QKd-vE-4m3" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="bYR-4P-aSk"/>
-                            <constraint firstItem="QKd-vE-4m3" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="e4U-0t-mle"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="QKd-vE-4m3" secondAttribute="trailing" constant="10" id="t6R-6e-bcR"/>
-                        </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
-                        <outlet property="profileView" destination="QKd-vE-4m3" id="5dR-fN-d8B"/>
+                        <outlet property="profileView" destination="5EZ-qb-Rvc" id="cF8-Gn-Sdr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

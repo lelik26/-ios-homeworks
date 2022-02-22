@@ -9,6 +9,8 @@ import UIKit
 
 class ProfileView: UIView {
 
+
+   
     @IBOutlet weak var fotoImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var birthdayLabel: UILabel!
@@ -30,7 +32,8 @@ class ProfileView: UIView {
             let view = self.loadViewFromXib()
             self.addSubview(view)
             view.frame = self.bounds // здесь view, загруженная из xib-файла, добавляется на вьюху класса. Ее размер соответствует размеру вьюхе класса и растягивается так же, как и сама вьюха класса.
-            view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+
+            view.autoresizingMask = [ .flexibleWidth, .flexibleHeight]
         
         }
         
