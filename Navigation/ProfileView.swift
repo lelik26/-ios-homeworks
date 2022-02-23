@@ -38,7 +38,8 @@ class ProfileView: UIView {
         }
         
         private func loadViewFromXib() -> UIView {
-            guard let view = Bundle.main.loadNibNamed("ProfileView", owner: nil, options: nil)?.first as? UIView else { return UIView() }
+            guard let view = Bundle.main.loadNibNamed("ProfileView", owner: self, options: nil)?.first as? UIView else { return UIView() }
+            
             
             return view
         }
