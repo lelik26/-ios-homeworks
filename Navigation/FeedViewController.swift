@@ -47,12 +47,15 @@ class FeedViewController: UIViewController {
     }
     
     @objc private func didTapTransitionButton() {
-          let postVC = PostViewController()
+        let postVC = PostViewController()
+    
         navigationController?.pushViewController(postVC, animated: true)
     }
 }
-struct Post {
 
-     let title: String = "Мой Пост"
- }
-let myPost = Post()
+struct Post {
+    let title: String
+    //let title: String = "Мой Пост"
+}
+//let myPost = Post()
+
