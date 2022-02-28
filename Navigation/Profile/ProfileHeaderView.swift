@@ -85,7 +85,7 @@ class ProfileHeaderView: UIView {
         let textField = UITextField()
         
         textField.isHidden = true
-        textField.placeholder = "Enter some status here"
+        textField.placeholder = statusLabel.text   //"Enter some status here"
         textField.textColor = .black
         textField.font = .systemFont(ofSize: 15, weight: .regular)
         textField.layer.cornerRadius = 12
@@ -179,6 +179,7 @@ class ProfileHeaderView: UIView {
     @objc private func statusTextChanged (_ textField: UITextField) {
       
         statusText = textField.text!
+        statusLabel.text = statusText
     }
     
 }
