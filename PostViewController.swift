@@ -8,18 +8,18 @@
 import UIKit
 
 class PostViewController: UIViewController {
- 
+    var post: Post?
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = myPost.title
+        title = post?.title
         let infoButton = UIBarButtonItem(title: "info" , style: .plain, target: self, action: #selector(didTapTransitionInfoButton))
         self.navigationItem.setRightBarButton(infoButton, animated: true)
         self.view.backgroundColor = .yellow
     }
-
-
-@objc func didTapTransitionInfoButton() {
-    let infoVC = InfoViewController()
-    self.navigationController?.pushViewController(infoVC, animated: true)
-}
+    
+    
+    @objc func didTapTransitionInfoButton() {
+        let infoVC = InfoViewController()
+        self.navigationController?.pushViewController(infoVC, animated: true)
+    }
 }
