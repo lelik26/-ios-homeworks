@@ -20,12 +20,13 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupNavigationBar()
-        self.setupView()
+       self.setupNavigationBar()
+       self.setupView()
         
     }
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+     
        
         
     }
@@ -43,10 +44,9 @@ class ProfileViewController: UIViewController {
         /// **Создания constrait  for View**
         
         let topConstraint = self.profileHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0)
-        let leadingConstraint = self.profileHeaderView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0)
-        let trailingConstraint = self.profileHeaderView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0)
-        self.heightConstraint = self.profileHeaderView.heightAnchor.constraint(equalToConstant: 170) // (посчитал высоту  высота стейка 100+ 20 расстоние до кнопки + 50 кнопка)bottomCostraint = self.profileHeaderView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
-//       self.bottomConstraint = self.profileHeaderView.bottomConstraint.constraint(equalToConstant: -20)
+        let leadingConstraint = self.profileHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0)
+        let trailingConstraint = self.profileHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0)
+        self.heightConstraint = self.profileHeaderView.heightAnchor.constraint(equalToConstant: 220) 
         
         NSLayoutConstraint.activate([topConstraint, leadingConstraint, trailingConstraint, self.heightConstraint].compactMap({ $0 }))// объявление всех constrait и активирует расчет
     }

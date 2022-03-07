@@ -16,7 +16,7 @@ protocol ProfileHeaderViewProtocol: AnyObject { // добавляем прото
 
 class ProfileHeaderView: UIView {
     
-    private lazy var avatar: UIImageView = {    // установка изображения
+    private lazy var avatarImageView: UIImageView = {    // установка изображения
         let imageView = UIImageView(image: UIImage(named: "Smurf.jpg"))
         imageView.backgroundColor = .clear
         imageView.layer.borderWidth = 3.0
@@ -26,9 +26,9 @@ class ProfileHeaderView: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    private lazy var nameLabel: UILabel = {
+    private lazy var fullNameLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .yellow
+        label.backgroundColor = .clear
         label.text = "Смурф"
         label.font = .systemFont(ofSize: 18, weight: .bold)
         label.textColor = .black
@@ -37,7 +37,7 @@ class ProfileHeaderView: UIView {
     }()
     private lazy var statusLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .red
+        label.backgroundColor = .clear
         label.text = "Waiting for something"
         label.font = .systemFont(ofSize: 14, weight: .regular)
         label.textColor = .gray
@@ -52,6 +52,7 @@ class ProfileHeaderView: UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
+    
     private lazy var infoStackView: UIStackView = { // стэк горизонтальный
         let stackView = UIStackView()
         // stackView.backgroundColor = .systemPink
@@ -61,7 +62,7 @@ class ProfileHeaderView: UIView {
         return stackView
     }()
     
-    private lazy var statusButton: UIButton = {
+    private lazy var setStatusButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 4
@@ -69,7 +70,7 @@ class ProfileHeaderView: UIView {
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 0.7
         button.layer.shadowRadius = 4
-        button.layer.shadowOffset = .init(width: 4, height: 4)
+        button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.setTitle("Set Status!", for: .normal)
         button.setTitle("Selected Status", for: .selected)
         button.clipsToBounds = true
@@ -115,14 +116,14 @@ class ProfileHeaderView: UIView {
     private func drawSelf() {
         self.backgroundColor = .lightGray
         
-        self.addSubview(self.statusButton)
+        self.addSubview(self.setStatusButton)
         self.addSubview(self.textField)
         self.addSubview(self.infoStackView)   // в view добавляем горизонтальный стэк
         
         
-        self.infoStackView.addArrangedSubview(self.avatar) //  добавляем аватар
+        self.infoStackView.addArrangedSubview(self.avatarImageView) //  добавляем аватар
         self.infoStackView.addArrangedSubview(self.stackLabelView) // добавляем вертикальный стэк
-        self.stackLabelView.addArrangedSubview(self.nameLabel) // в вертикальный стэк добавляем label
+        self.stackLabelView.addArrangedSubview(self.fullNameLabel) // в вертикальный стэк добавляем label
         self.stackLabelView.addArrangedSubview(self.statusLabel) //
         
         let topConstraint = self.infoStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16)
@@ -133,16 +134,16 @@ class ProfileHeaderView: UIView {
         //        let topStackLabelConstraint = self.stackLabelView.topAnchor.constraint(equalTo: self.infoStackView.topAnchor, constant: 11 )
         //        let bottonStackLabelConstraint = self.stackLabelView.bottomAnchor.constraint(equalTo: self.infoStackView.bottomAnchor, constant: -18 )
         //
-        let imageViewAspectRatio = self.avatar.heightAnchor.constraint(equalTo: self.avatar.widthAnchor, multiplier: 1.0) // задаем размер картинки и соотношение  сторон 1:1
+        let imageViewAspectRatio = self.avatarImageView.heightAnchor.constraint(equalTo: self.avatarImageView.widthAnchor, multiplier: 1.0) // задаем размер картинки и соотношение  сторон 1:1
         
-        self.buttonTopConstraint = self.statusButton.topAnchor.constraint(equalTo: self.infoStackView.bottomAnchor, constant: 16)// чтобы кнопка имела динамический констрейт задаем опционал
+        self.buttonTopConstraint = self.setStatusButton.topAnchor.constraint(equalTo: self.infoStackView.bottomAnchor, constant: 16)// чтобы кнопка имела динамический констрейт задаем опционал
         
         self.buttonTopConstraint?.priority = UILayoutPriority(rawValue: 999) // и приоритет
         
-        let leadingButtonConstraint = self.statusButton.leadingAnchor.constraint(equalTo: self.infoStackView.leadingAnchor)
-        let trailingButtonConstraint = self.statusButton.trailingAnchor.constraint(equalTo: self.infoStackView.trailingAnchor)
-        let heightButtonConstraint = self.statusButton.heightAnchor.constraint(equalToConstant: 50)
-        let bottomButtonConstraint = self.statusButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)
+        let leadingButtonConstraint = self.setStatusButton.leadingAnchor.constraint(equalTo: self.infoStackView.leadingAnchor)
+        let trailingButtonConstraint = self.setStatusButton.trailingAnchor.constraint(equalTo: self.infoStackView.trailingAnchor)
+        let heightButtonConstraint = self.setStatusButton.heightAnchor.constraint(equalToConstant: 50)
+        let bottomButtonConstraint = self.setStatusButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)
         
         //         heightConstraint,topStackLabelConstraint, bottonStackLabelConstraint,
         
@@ -157,8 +158,8 @@ class ProfileHeaderView: UIView {
             let topConstraint = self.textField.topAnchor.constraint(equalTo: self.infoStackView.bottomAnchor, constant: 16)
             let leadingConstraint = self.textField.leadingAnchor.constraint(equalTo: self.statusLabel.leadingAnchor)
             let trailingConstraint = self.textField.trailingAnchor.constraint(equalTo: self.statusLabel.trailingAnchor)
-            let heightTextFieldConstraint = self.textField.heightAnchor.constraint(equalToConstant: 34) // Не указав высоту textField'а, получается неоднозначность/неопределенность констрейнтов. Auto Layout на основе этой неопределенности имеет множество решений (height для stackView, textField), выбирая оптимальное, а не необходимое, то есть вместо 34pts для textField'а растягивается stackView.
-            self.buttonTopConstraint = self.statusButton.topAnchor.constraint(equalTo: self.textField.bottomAnchor, constant: 20)
+            let heightTextFieldConstraint = self.textField.heightAnchor.constraint(equalToConstant: 40) // Не указав высоту textField'а, получается неоднозначность/неопределенность констрейнтов. Auto Layout на основе этой неопределенности имеет множество решений (height для stackView, textField), выбирая оптимальное, а не необходимое, то есть вместо 34pts для textField'а растягивается stackView.
+            self.buttonTopConstraint = self.setStatusButton.topAnchor.constraint(equalTo: self.textField.bottomAnchor, constant: 20)
             self.buttonTopConstraint?.priority = UILayoutPriority(rawValue: 998)
             
             NSLayoutConstraint.activate([
@@ -184,24 +185,6 @@ class ProfileHeaderView: UIView {
     
 }
 
-/*
- Добавьте обработку нажатия по кнопке addTarget, UIEvent выбрать .touchUpInside. Добавьте функцию, которую будет принимать обработчик, например, @objc func buttonPressed()
- 
- Функция должна выводить в консоль текст из поля "статус".
- При нажатии на кнопку должен происходить вызов функции.
- 
- Добавьте экземпляр класса UITextField в класс ProfileHeaderView, выполните необходимые настройки согласно макету.
- 
- Добавьте обработку изменения введенного текста при помощи addTarget, UIEvent выбрать .editingChanged. Добавьте функцию, которую будет принимать обработчик, например, @objc func statusTextChanged(_ textField: UITextField).
- 
- Добавьте приватную переменную statusText с типом данных String.
- Функция statusTextChanged(_ :) должна записывать текст в переменную statusText.
- Измените функцию buttonPressed() так, чтобы при нажатии на кнопку введенный текст устанавливался в качестве статуса.
- 
- 
- 
- 
- */
 
 
 
