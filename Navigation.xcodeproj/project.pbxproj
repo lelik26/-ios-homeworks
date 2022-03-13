@@ -23,14 +23,13 @@
 		F5E6CD6A27DDA6C400F080B7 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E6CD6927DDA6C400F080B7 /* UIColor.swift */; };
 		F5E6CD6C27DDA70A00F080B7 /* String Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E6CD6B27DDA70A00F080B7 /* String Data.swift */; };
 		F5E6CD6F27DDA93A00F080B7 /* Setupable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E6CD6E27DDA93A00F080B7 /* Setupable.swift */; };
-		F5E6CD7C27DDEA4800F080B7 /* Navigation in Resources */ = {isa = PBXBuildFile; fileRef = F5E6CD7B27DDEA4800F080B7 /* Navigation */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F50A6F9C27C5D72A00193993 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
-		F50A6FA227C5DE1400193993 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TabBarController.swift; path = ../TabBarController.swift; sourceTree = "<group>"; };
-		F50A6FA427C5E75000193993 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PostViewController.swift; path = ../PostViewController.swift; sourceTree = "<group>"; };
-		F50A6FA627C5E78700193993 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InfoViewController.swift; path = ../InfoViewController.swift; sourceTree = "<group>"; };
+		F50A6FA227C5DE1400193993 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		F50A6FA427C5E75000193993 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		F50A6FA627C5E78700193993 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		F50D9FCB27D749F500B0CA4D /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LogInViewController.swift; path = Navigation/LogInViewController.swift; sourceTree = SOURCE_ROOT; };
 		F516D98727BD09040065CAB5 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F516D98A27BD09040065CAB5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -45,7 +44,6 @@
 		F5E6CD6927DDA6C400F080B7 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		F5E6CD6B27DDA70A00F080B7 /* String Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String Data.swift"; sourceTree = "<group>"; };
 		F5E6CD6E27DDA93A00F080B7 /* Setupable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setupable.swift; sourceTree = "<group>"; };
-		F5E6CD7B27DDEA4800F080B7 /* Navigation */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Navigation; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,9 +60,11 @@
 		F516D97E27BD09040065CAB5 = {
 			isa = PBXGroup;
 			children = (
+				F50A6FA427C5E75000193993 /* PostViewController.swift */,
+				F50A6FA627C5E78700193993 /* InfoViewController.swift */,
+				F50A6FA227C5DE1400193993 /* TabBarController.swift */,
 				F516D98927BD09040065CAB5 /* Navigation */,
-				F5E6CD7B27DDEA4800F080B7 /* Navigation */,
-				F5E6CD6827DDA61D00F080B7 /* Extensions2 */,
+				F5E6CD6827DDA61D00F080B7 /* Extensions */,
 				F5E6CD6D27DDA88900F080B7 /* Protocols */,
 				F516D98827BD09040065CAB5 /* Products */,
 			);
@@ -81,10 +81,6 @@
 		F516D98927BD09040065CAB5 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				F50A6FA627C5E78700193993 /* InfoViewController.swift */,
-				F50A6FA227C5DE1400193993 /* TabBarController.swift */,
-				F50A6FA427C5E75000193993 /* PostViewController.swift */,
-				F5E6CD7A27DDE9AD00F080B7 /* New Group */,
 				F516D98A27BD09040065CAB5 /* AppDelegate.swift */,
 				F516D98C27BD09040065CAB5 /* SceneDelegate.swift */,
 				F50A6F9C27C5D72A00193993 /* FeedViewController.swift */,
@@ -116,13 +112,13 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		F5E6CD6827DDA61D00F080B7 /* Extensions2 */ = {
+		F5E6CD6827DDA61D00F080B7 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				F5E6CD6927DDA6C400F080B7 /* UIColor.swift */,
 				F5E6CD6B27DDA70A00F080B7 /* String Data.swift */,
 			);
-			path = Extensions2;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		F5E6CD6D27DDA88900F080B7 /* Protocols */ = {
@@ -131,13 +127,6 @@
 				F5E6CD6E27DDA93A00F080B7 /* Setupable.swift */,
 			);
 			path = Protocols;
-			sourceTree = "<group>";
-		};
-		F5E6CD7A27DDE9AD00F080B7 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -198,7 +187,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F5E6CD7C27DDEA4800F080B7 /* Navigation in Resources */,
 				F516D99727BD09050065CAB5 /* LaunchScreen.storyboard in Resources */,
 				F516D99427BD09050065CAB5 /* Assets.xcassets in Resources */,
 			);
