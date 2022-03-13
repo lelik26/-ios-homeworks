@@ -1,8 +1,8 @@
 //
 //  ProfileViewController.swift
-//  Navigation
+//  Navigation v2
 //
-//  Created by Alex Alex on 23.02.2022.
+//  Created by Alex Alex on 13.03.2022.
 //
 
 import UIKit
@@ -47,7 +47,7 @@ class ProfileViewController: UIViewController {
 
         let leadingConstraint = self.profileHeaderView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0)
         let trailingConstraint = self.profileHeaderView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0)
-        let bottomConstraint = self.profileHeaderView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -0)  
+        let bottomConstraint = self.profileHeaderView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -0)
         NSLayoutConstraint.activate([topConstraint, leadingConstraint, trailingConstraint, bottomConstraint].compactMap({ $0 }))// объявление всех constrait и активирует расчет self.heightConstraint
     }
     

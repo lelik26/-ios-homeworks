@@ -1,14 +1,11 @@
 //
 //  ProfileHeaderView.swift
-//  Navigation
+//  Navigation v2
 //
-//  Created by Alex Alex on 23.02.2022.
+//  Created by Alex Alex on 13.03.2022.
 //
 
 import UIKit
-
-
-
 
 protocol ProfileHeaderViewProtocol: AnyObject { // добавляем протокол с функцией didTapStatusButton с активным текстовым полем
     func buttonPressed(textFieldIsVisible: Bool, completion: @escaping () -> Void)
@@ -20,7 +17,7 @@ class ProfileHeaderView: UIView {
 
 
     private lazy var avatarImageView: UIImageView = {    // установка изображения
-        let imageView = UIImageView(image: UIImage(named: "Smurf.jpg"))
+        let imageView = UIImageView(image: UIImage(named: "smurf.jpg"))
        
         imageView.backgroundColor = .clear
         imageView.layer.borderWidth = 3.0
@@ -116,30 +113,30 @@ class ProfileHeaderView: UIView {
         
         self.addSubview(self.setStatusButton)
         self.addSubview(self.textField)
-        self.addSubview(self.avatarImage)
+        self.addSubview(self.avatarImageView)
         self.addSubview(self.stackLabelView)
         
-        self.stackLabelView.addArrangedSubview(self.nameLabel)
+        self.stackLabelView.addArrangedSubview(self.fullNameLabel)
         self.stackLabelView.addArrangedSubview(self.statusLabel)
         
 
-        let topImageConstraint = self.avatarImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 16)
-        let leadingImageConstraint = self.avatarImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16)
-        let heightImageConstraint = self.avatarImage.heightAnchor.constraint(equalToConstant: 90)
+        let topImageConstraint = self.avatarImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16)
+        let leadingImageConstraint = self.avatarImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16)
+        let heightImageConstraint = self.avatarImageView.heightAnchor.constraint(equalToConstant: 90)
 
-        let imageViewAspectRatio = self.avatarImage.heightAnchor.constraint(equalTo: self.avatarImage.widthAnchor, multiplier: 1.0)
+        let imageViewAspectRatio = self.avatarImageView.heightAnchor.constraint(equalTo: self.avatarImageView.widthAnchor, multiplier: 1.0)
         
         let topStackViewConstraint = self.stackLabelView.topAnchor.constraint(equalTo: self.topAnchor, constant: 27)
-        let leadingStackViewConstraint = self.stackLabelView.leadingAnchor.constraint(equalTo: self.avatarImage.trailingAnchor, constant: 10)
+        let leadingStackViewConstraint = self.stackLabelView.leadingAnchor.constraint(equalTo: self.avatarImageView.trailingAnchor, constant: 10)
         let trailingStackViewConstraint = self.stackLabelView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16)
         let heighStackViewtConstraint = self.stackLabelView.heightAnchor.constraint(equalToConstant: 61)
         
-        self.buttonTopConstraint = self.statusButton.topAnchor.constraint(equalTo: self.stackLabelView.bottomAnchor, constant: 34)
+        self.buttonTopConstraint = self.setStatusButton.topAnchor.constraint(equalTo: self.stackLabelView.bottomAnchor, constant: 34)
         self.buttonTopConstraint?.priority = UILayoutPriority(rawValue: 999)
         
-        let leadingButtonConstraint = self.statusButton.leadingAnchor.constraint(equalTo: self.avatarImage.leadingAnchor)
-        let trailingButtonConstraint = self.statusButton.trailingAnchor.constraint(equalTo: self.stackLabelView.trailingAnchor)
-        let heightButtonConstraint = self.statusButton.heightAnchor.constraint(equalToConstant: 50)
+        let leadingButtonConstraint = self.setStatusButton.leadingAnchor.constraint(equalTo: self.avatarImageView.leadingAnchor)
+        let trailingButtonConstraint = self.setStatusButton.trailingAnchor.constraint(equalTo: self.stackLabelView.trailingAnchor)
+        let heightButtonConstraint = self.setStatusButton.heightAnchor.constraint(equalToConstant: 50)
 //        let bottomButtonConstraint = self.statusButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)
         
 
@@ -159,7 +156,7 @@ class ProfileHeaderView: UIView {
             let leadingConstraint = self.textField.leadingAnchor.constraint(equalTo: self.statusLabel.leadingAnchor)
             let trailingConstraint = self.textField.trailingAnchor.constraint(equalTo: self.statusLabel.trailingAnchor)
             let heightTextFieldConstraint = self.textField.heightAnchor.constraint(equalToConstant: 40) // Не указав высоту textField'а, получается неоднозначность/неопределенность констрейнтов. Auto Layout на основе этой неопределенности имеет множество решений (height для stackView, textField), выбирая оптимальное, а не необходимое, то есть вместо 34pts для textField'а растягивается stackView.
-            self.buttonPressTopConstraint = self.statusButton.topAnchor.constraint(equalTo: self.stackLabelView.bottomAnchor, constant: 90)
+            self.buttonPressTopConstraint = self.setStatusButton.topAnchor.constraint(equalTo: self.stackLabelView.bottomAnchor, constant: 90)
             self.buttonPressTopConstraint?.priority = UILayoutPriority(rawValue: 999)
 
 
