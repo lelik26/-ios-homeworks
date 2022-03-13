@@ -18,6 +18,25 @@ class ProfileViewController: UIViewController {
     
     private var heightConstraint: NSLayoutConstraint? //
     
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.estimatedRowHeight = 0 // желаемая высота ячейки  -не 44
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")
+        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "ArticleCell")
+        tableView.backgroundColor = .black
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
+    
+    
+    private lazy var jsonDecoder: JSONDecoder = {
+        return JSONDecoder()
+    }()
+    
+    private var dataSource: [News.Article] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
        self.setupNavigationBar()
@@ -54,10 +73,26 @@ class ProfileViewController: UIViewController {
     
 }
 
+private func fetchArticles(completion: @escaping ([News.Article]) -> Void) {
+    if let path = Bundle.main.path(forResource: "news", ofType: "json") {
+        do {
+            let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
+//                let jsonObj = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+            let news = try self.jsonDecoder.decode(News.self, from: data)
+            print("json data: \(news)")
+            completion(news.articles)
+        } catch let error {
+            print("parse error: \(error.localizedDescription)")
+        }
+    } else {
+        fatalError("Invalid filename/path.")
+    }
+}
+
 extension ProfileViewController: ProfileHeaderViewProtocol {
     
     func buttonPressed (textFieldIsVisible: Bool, completion: @escaping () -> Void) {
-        self.heightConstraint?.constant = textFieldIsVisible ? 270 : 240
+        self.heightConstraint?.constant = textFieldIsVisible ? 270 : 220
         
         UIView.animate(withDuration: 0.3, delay: 0.1) {
             self.view.layoutIfNeeded()
@@ -67,6 +102,29 @@ extension ProfileViewController: ProfileHeaderViewProtocol {
     }
 }
 
-   
+extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.dataSource.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as? PostTableViewCell else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
+            return cell
+        }
+        
+        let article = self.dataSource[indexPath.row]
+        let postViewModel = PostTableViewCell.PostViewModel(author: article.author,  description: article.description, image: article.image, likes: 2, views: 4)
+        
+        cell.setup(with: postViewModel)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 176 // 308  // высота ячейкии heightForRowAt // не должно быть кучу свободного пространства
+    }
+}
+
 
 

@@ -72,7 +72,7 @@ class ProfileHeaderView: UIView {
         button.layer.shadowRadius = 4
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.setTitle("Set Status!", for: .normal)
-        button.setTitle("Selected Status", for: .selected)
+        //button.setTitle("Selected Status", for: .selected)
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(self.buttonPressed), for: .touchUpInside)// добавляем активную кнопку
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -143,7 +143,7 @@ class ProfileHeaderView: UIView {
         let leadingButtonConstraint = self.setStatusButton.leadingAnchor.constraint(equalTo: self.infoStackView.leadingAnchor)
         let trailingButtonConstraint = self.setStatusButton.trailingAnchor.constraint(equalTo: self.infoStackView.trailingAnchor)
         let heightButtonConstraint = self.setStatusButton.heightAnchor.constraint(equalToConstant: 50)
-        let bottomButtonConstraint = self.setStatusButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)
+        let bottomButtonConstraint = self.setStatusButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10)
         
         //         heightConstraint,topStackLabelConstraint, bottonStackLabelConstraint,
         
@@ -159,7 +159,7 @@ class ProfileHeaderView: UIView {
             let leadingConstraint = self.textField.leadingAnchor.constraint(equalTo: self.statusLabel.leadingAnchor)
             let trailingConstraint = self.textField.trailingAnchor.constraint(equalTo: self.statusLabel.trailingAnchor)
             let heightTextFieldConstraint = self.textField.heightAnchor.constraint(equalToConstant: 40) // Не указав высоту textField'а, получается неоднозначность/неопределенность констрейнтов. Auto Layout на основе этой неопределенности имеет множество решений (height для stackView, textField), выбирая оптимальное, а не необходимое, то есть вместо 34pts для textField'а растягивается stackView.
-            self.buttonTopConstraint = self.setStatusButton.topAnchor.constraint(equalTo: self.textField.bottomAnchor, constant: 20)
+            self.buttonTopConstraint = self.setStatusButton.topAnchor.constraint(equalTo: self.textField.bottomAnchor, constant: 32)
             self.buttonTopConstraint?.priority = UILayoutPriority(rawValue: 998)
             
             NSLayoutConstraint.activate([
