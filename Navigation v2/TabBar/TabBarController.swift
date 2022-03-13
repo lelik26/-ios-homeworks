@@ -1,8 +1,8 @@
 //
 //  TabBarController.swift
-//  Navigation
+//  Navigation v2
 //
-//  Created by Alex Alex on 23.02.2022.
+//  Created by Alex Alex on 13.03.2022.
 //
 
 import UIKit
@@ -49,7 +49,7 @@ class TabBarController: UITabBarController {
             case .feed:
                 return UINavigationController(rootViewController: FeedViewController())
             case .profile:
-                return UINavigationController(rootViewController: ProfileViewController())
+                return UINavigationController(rootViewController: LogInViewController())
         
              
             }
@@ -60,4 +60,5 @@ class TabBarController: UITabBarController {
         })
     }
 }
+
 
