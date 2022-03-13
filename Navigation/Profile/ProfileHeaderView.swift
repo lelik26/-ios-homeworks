@@ -16,7 +16,10 @@ protocol ProfileHeaderViewProtocol: AnyObject { // добавляем прото
 
 class ProfileHeaderView: UIView {
     
-    private lazy var avatarImage: UIImageView = {    // установка изображения
+
+
+
+    private lazy var avatarImageView: UIImageView = {    // установка изображения
         let imageView = UIImageView(image: UIImage(named: "Smurf.jpg"))
        
         imageView.backgroundColor = .clear
@@ -27,7 +30,7 @@ class ProfileHeaderView: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    private lazy var nameLabel: UILabel = {
+    private lazy var fullNameLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .lightGray
         label.text = "Смурф"
@@ -39,6 +42,8 @@ class ProfileHeaderView: UIView {
     private lazy var statusLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .lightGray
+
+   
         label.text = "Waiting for something"
         label.font = .systemFont(ofSize: 14, weight: .regular)
         label.textColor = .gray
@@ -54,9 +59,8 @@ class ProfileHeaderView: UIView {
         return stackView
     }()
     
-
     
-    private lazy var statusButton: UIButton = {
+    private lazy var setStatusButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 4
@@ -110,7 +114,7 @@ class ProfileHeaderView: UIView {
     private func drawSelf() {
         self.backgroundColor = .lightGray
         
-        self.addSubview(self.statusButton)
+        self.addSubview(self.setStatusButton)
         self.addSubview(self.textField)
         self.addSubview(self.avatarImage)
         self.addSubview(self.stackLabelView)
@@ -118,20 +122,17 @@ class ProfileHeaderView: UIView {
         self.stackLabelView.addArrangedSubview(self.nameLabel)
         self.stackLabelView.addArrangedSubview(self.statusLabel)
         
+
         let topImageConstraint = self.avatarImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 16)
         let leadingImageConstraint = self.avatarImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16)
         let heightImageConstraint = self.avatarImage.heightAnchor.constraint(equalToConstant: 90)
 
         let imageViewAspectRatio = self.avatarImage.heightAnchor.constraint(equalTo: self.avatarImage.widthAnchor, multiplier: 1.0)
         
-        
-        
         let topStackViewConstraint = self.stackLabelView.topAnchor.constraint(equalTo: self.topAnchor, constant: 27)
         let leadingStackViewConstraint = self.stackLabelView.leadingAnchor.constraint(equalTo: self.avatarImage.trailingAnchor, constant: 10)
         let trailingStackViewConstraint = self.stackLabelView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16)
         let heighStackViewtConstraint = self.stackLabelView.heightAnchor.constraint(equalToConstant: 61)
-        
-        
         
         self.buttonTopConstraint = self.statusButton.topAnchor.constraint(equalTo: self.stackLabelView.bottomAnchor, constant: 34)
         self.buttonTopConstraint?.priority = UILayoutPriority(rawValue: 999)
@@ -141,6 +142,7 @@ class ProfileHeaderView: UIView {
         let heightButtonConstraint = self.statusButton.heightAnchor.constraint(equalToConstant: 50)
 //        let bottomButtonConstraint = self.statusButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)
         
+
         
         
         NSLayoutConstraint.activate([topImageConstraint, leadingImageConstraint, heightImageConstraint,imageViewAspectRatio,topStackViewConstraint, leadingStackViewConstraint, trailingStackViewConstraint, heighStackViewtConstraint,buttonTopConstraint,leadingButtonConstraint, trailingButtonConstraint, heightButtonConstraint, ].compactMap({ $0 })) // объявление всех constrait и активирует расчет
@@ -159,6 +161,9 @@ class ProfileHeaderView: UIView {
             let heightTextFieldConstraint = self.textField.heightAnchor.constraint(equalToConstant: 40) // Не указав высоту textField'а, получается неоднозначность/неопределенность констрейнтов. Auto Layout на основе этой неопределенности имеет множество решений (height для stackView, textField), выбирая оптимальное, а не необходимое, то есть вместо 34pts для textField'а растягивается stackView.
             self.buttonPressTopConstraint = self.statusButton.topAnchor.constraint(equalTo: self.stackLabelView.bottomAnchor, constant: 90)
             self.buttonPressTopConstraint?.priority = UILayoutPriority(rawValue: 999)
+
+
+            
 
             NSLayoutConstraint.activate([
                 topConstraint, leadingConstraint, trailingConstraint, heightTextFieldConstraint, self.buttonPressTopConstraint
