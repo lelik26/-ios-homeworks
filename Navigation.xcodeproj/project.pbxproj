@@ -48,9 +48,6 @@
 		F516D97E27BD09040065CAB5 = {
 			isa = PBXGroup;
 			children = (
-				F50A6FA427C5E75000193993 /* PostViewController.swift */,
-				F50A6FA627C5E78700193993 /* InfoViewController.swift */,
-				F50A6FA227C5DE1400193993 /* TabBarController.swift */,
 				F516D98927BD09040065CAB5 /* Navigation */,
 				F516D98827BD09040065CAB5 /* Products */,
 			);
@@ -67,6 +64,10 @@
 		F516D98927BD09040065CAB5 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				F50A6FA627C5E78700193993 /* InfoViewController.swift */,
+				F5E6CD7F27DDF02700F080B7 /* Info */,
+				F5E6CD7E27DDF01300F080B7 /* Post */,
+				F5E6CD7D27DDEFFF00F080B7 /* TabBar */,
 				F516D98A27BD09040065CAB5 /* AppDelegate.swift */,
 				F516D98C27BD09040065CAB5 /* SceneDelegate.swift */,
 				F50A6F9C27C5D72A00193993 /* FeedViewController.swift */,
@@ -85,6 +86,29 @@
 				F5DBCE6027C65ED4007E5783 /* ProfileViewController.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		F5E6CD7D27DDEFFF00F080B7 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				F50A6FA227C5DE1400193993 /* TabBarController.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		F5E6CD7E27DDF01300F080B7 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				F50A6FA427C5E75000193993 /* PostViewController.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		F5E6CD7F27DDF02700F080B7 /* Info */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Info;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
