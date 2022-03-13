@@ -45,6 +45,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F50C8C8327DDFA3D00655F40 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				F50A6F9C27C5D72A00193993 /* FeedViewController.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		F50C8C8427DDFA5E00655F40 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				F516D98C27BD09040065CAB5 /* SceneDelegate.swift */,
+				F516D98A27BD09040065CAB5 /* AppDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
 		F516D97E27BD09040065CAB5 = {
 			isa = PBXGroup;
 			children = (
@@ -64,12 +81,11 @@
 		F516D98927BD09040065CAB5 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				F50C8C8427DDFA5E00655F40 /* Application */,
 				F5E6CD7327DDC57300F080B7 /* InfoView */,
 				F5E6CD7127DDC55400F080B7 /* TabBar */,
 				F5E6CD7027DDC54400F080B7 /* Post */,
-				F516D98A27BD09040065CAB5 /* AppDelegate.swift */,
-				F516D98C27BD09040065CAB5 /* SceneDelegate.swift */,
-				F50A6F9C27C5D72A00193993 /* FeedViewController.swift */,
+				F50C8C8327DDFA3D00655F40 /* Feed */,
 				F516D99327BD09050065CAB5 /* Assets.xcassets */,
 				F516D99527BD09050065CAB5 /* LaunchScreen.storyboard */,
 				F516D99827BD09050065CAB5 /* Info.plist */,
