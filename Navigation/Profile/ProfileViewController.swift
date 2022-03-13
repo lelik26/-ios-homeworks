@@ -16,7 +16,7 @@ class ProfileViewController: UIViewController {
         return view
     }()
     
-    private var heightConstraint: NSLayoutConstraint? //
+ //   private var heightConstraint: NSLayoutConstraint? //
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,21 +44,21 @@ class ProfileViewController: UIViewController {
         /// **Создания constrait  for View**
         
         let topConstraint = self.profileHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0)
-        let leadingConstraint = self.profileHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0)
-        let trailingConstraint = self.profileHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0)
-        self.heightConstraint = self.profileHeaderView.heightAnchor.constraint(equalToConstant: 220) 
-        
-        NSLayoutConstraint.activate([topConstraint, leadingConstraint, trailingConstraint, self.heightConstraint].compactMap({ $0 }))// объявление всех constrait и активирует расчет
+
+        let leadingConstraint = self.profileHeaderView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0)
+        let trailingConstraint = self.profileHeaderView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0)
+        let bottomConstraint = self.profileHeaderView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -0)  
+        NSLayoutConstraint.activate([topConstraint, leadingConstraint, trailingConstraint, bottomConstraint].compactMap({ $0 }))// объявление всех constrait и активирует расчет self.heightConstraint
     }
     
     
 }
 
 extension ProfileViewController: ProfileHeaderViewProtocol {
-    
+
     func buttonPressed (textFieldIsVisible: Bool, completion: @escaping () -> Void) {
-        self.heightConstraint?.constant = textFieldIsVisible ? 270 : 240
-        
+    //    self.heightConstraint?.constant = textFieldIsVisible ? 270 : 240
+
         UIView.animate(withDuration: 0.3, delay: 0.1) {
             self.view.layoutIfNeeded()
         } completion: { _ in

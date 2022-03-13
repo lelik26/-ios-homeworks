@@ -1,8 +1,15 @@
 //
+<<<<<<< HEAD
 //  TabBarController.swift
 //  Navigation
 //
 //  Created by Alex Alex on 23.02.2022.
+=======
+//  TabBarViewController.swift
+//  Navigation
+//
+//  Created by Alex Alex on 13.03.2022.
+>>>>>>> 0fb6cca20e1d02103dbc4db38c60ff3afe854a4b
 //
 
 import UIKit
@@ -61,3 +68,7 @@ class TabBarController: UITabBarController {
     }
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0fb6cca20e1d02103dbc4db38c60ff3afe854a4b
