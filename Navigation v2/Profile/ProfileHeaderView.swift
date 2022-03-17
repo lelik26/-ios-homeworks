@@ -66,7 +66,7 @@ class ProfileHeaderView: UIView {
         button.layer.shadowOpacity = 0.7
         button.layer.shadowRadius = 4
         button.layer.shadowOffset = .init(width: 4, height: 4)
-        button.setTitle("Show Status!", for: .normal)
+        button.setTitle("Show Status", for: .normal)
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(self.buttonPressed), for: .touchUpInside)
         button.setTitle("Set Status", for: .selected)
@@ -144,8 +144,8 @@ class ProfileHeaderView: UIView {
         
         NSLayoutConstraint.activate([topImageConstraint, leadingImageConstraint, heightImageConstraint,imageViewAspectRatio,topStackViewConstraint, leadingStackViewConstraint, trailingStackViewConstraint, heighStackViewtConstraint,buttonTopConstraint,leadingButtonConstraint, trailingButtonConstraint, heightButtonConstraint, ].compactMap({ $0 })) // объявление всех constrait и активирует расчет
     }
-    @objc private func buttonPressed() {
-       
+    @objc private func buttonPressed(_ button: UIButton) {
+        button.isSelected = !button.isSelected
         if self.textField.isHidden {
             self.addSubview(self.textField)
            
