@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F53228ED27EB6D25005B8EFF /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53228EC27EB6D25005B8EFF /* String+extension.swift */; };
+		F53228EF27EB6D40005B8EFF /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53228EE27EB6D40005B8EFF /* UIColor+extension.swift */; };
+		F53228F127EB6D5E005B8EFF /* Setupable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53228F027EB6D5E005B8EFF /* Setupable.swift */; };
+		F53228F427EB6D8E005B8EFF /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53228F327EB6D8E005B8EFF /* PostTableViewCell.swift */; };
 		F574FC8727DE0FD80017550B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F574FC8627DE0FD80017550B /* AppDelegate.swift */; };
 		F574FC8927DE0FD80017550B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F574FC8827DE0FD80017550B /* SceneDelegate.swift */; };
 		F574FC8B27DE0FD80017550B /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F574FC8A27DE0FD80017550B /* FeedViewController.swift */; };
@@ -22,6 +26,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F53228EC27EB6D25005B8EFF /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
+		F53228EE27EB6D40005B8EFF /* UIColor+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
+		F53228F027EB6D5E005B8EFF /* Setupable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setupable.swift; sourceTree = "<group>"; };
+		F53228F327EB6D8E005B8EFF /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		F574FC8327DE0FD80017550B /* Navigation v2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Navigation v2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F574FC8627DE0FD80017550B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F574FC8827DE0FD80017550B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +57,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F53228EA27EB6CA8005B8EFF /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				F53228F027EB6D5E005B8EFF /* Setupable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		F53228EB27EB6CBC005B8EFF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F53228EC27EB6D25005B8EFF /* String+extension.swift */,
+				F53228EE27EB6D40005B8EFF /* UIColor+extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F53228F227EB6D67005B8EFF /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				F53228F327EB6D8E005B8EFF /* PostTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		F574FC7A27DE0FD80017550B = {
 			isa = PBXGroup;
 			children = (
@@ -68,16 +101,18 @@
 		F574FC8527DE0FD80017550B /* Navigation v2 */ = {
 			isa = PBXGroup;
 			children = (
+				F574FC9A27DE0FEC0017550B /* Application */,
+				F574FC9B27DE10030017550B /* TabBar */,
 				F574FCA227DE14A20017550B /* LogIn */,
 				F574FC9F27DE103E0017550B /* Profile */,
 				F574FC9E27DE10260017550B /* Post */,
 				F574FC9D27DE101A0017550B /* InfoView */,
 				F574FC9C27DE100D0017550B /* Feed */,
-				F574FC9B27DE10030017550B /* TabBar */,
-				F574FC9A27DE0FEC0017550B /* Application */,
 				F574FC8F27DE0FD90017550B /* Assets.xcassets */,
 				F574FC9127DE0FD90017550B /* LaunchScreen.storyboard */,
 				F574FC9427DE0FD90017550B /* Info.plist */,
+				F53228EB27EB6CBC005B8EFF /* Extensions */,
+				F53228EA27EB6CA8005B8EFF /* Protocols */,
 			);
 			path = "Navigation v2";
 			sourceTree = "<group>";
@@ -126,6 +161,7 @@
 		F574FC9F27DE103E0017550B /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				F53228F227EB6D67005B8EFF /* Cell */,
 				F574FCA927DE155E0017550B /* ProfileViewController.swift */,
 				F574FCAB27DE15E80017550B /* ProfileHeaderView.swift */,
 			);
@@ -214,12 +250,16 @@
 				F574FCAE27DE16030017550B /* LogInView.swift in Sources */,
 				F574FCA627DE15020017550B /* PostViewController.swift in Sources */,
 				F574FC8B27DE0FD80017550B /* FeedViewController.swift in Sources */,
+				F53228EF27EB6D40005B8EFF /* UIColor+extension.swift in Sources */,
 				F574FCA127DE14390017550B /* TabBarController.swift in Sources */,
 				F574FCA827DE15460017550B /* InfoViewController.swift in Sources */,
+				F53228ED27EB6D25005B8EFF /* String+extension.swift in Sources */,
+				F53228F427EB6D8E005B8EFF /* PostTableViewCell.swift in Sources */,
 				F574FCAC27DE15E80017550B /* ProfileHeaderView.swift in Sources */,
 				F574FC8727DE0FD80017550B /* AppDelegate.swift in Sources */,
 				F574FCA427DE14E90017550B /* LogInViewController.swift in Sources */,
 				F574FCAA27DE155E0017550B /* ProfileViewController.swift in Sources */,
+				F53228F127EB6D5E005B8EFF /* Setupable.swift in Sources */,
 				F574FC8927DE0FD80017550B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
