@@ -54,8 +54,7 @@ class ProfileViewController: UIViewController {
     private func setupView() {     //
         self.view.backgroundColor = .white
         self.view.addSubview(self.tableView)
-        
-        
+      
         NSLayoutConstraint.activate([
             self.tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
             self.tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),

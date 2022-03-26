@@ -14,8 +14,8 @@ class FeedViewController: UIViewController {
         let button = UIButton()
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
-        button.backgroundColor = .systemBlue
-        button.setTitle("ButtonFirst", for: .normal)
+        button.backgroundColor = .systemRed
+        button.setTitle("Жесты и Анимация", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(didTapTransitionButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -68,7 +68,7 @@ class FeedViewController: UIViewController {
 //            self.stackButtonView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
             self.stackButtonView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             self.stackButtonView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            self.stackButtonView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+            self.stackButtonView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -200)
 //            self.stackButtonView.heightAnchor.constraint(equalToConstant: 200),
 //            self.stackButtonView.widthAnchor.constraint(equalToConstant: 200),
         ].compactMap({ $0 }))
