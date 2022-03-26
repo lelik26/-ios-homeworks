@@ -131,40 +131,25 @@ class PostTableViewCell: UITableViewCell {
      self.infoStackView.addArrangedSubview(self.likesLabel)
      self.infoStackView.addArrangedSubview(self.viewsLabel)
      
-     let backViewConstraints = self.backViewConstraints()
-     let stackViewConstraints = self.stackViewConstraints()
-
-     NSLayoutConstraint.activate(backViewConstraints + stackViewConstraints)
+     NSLayoutConstraint.activate([
+        self.backView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 0),
+        self.backView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 0),
+        self.backView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 0),
+        self.backView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: 0),
+        self.stackView.topAnchor.constraint(equalTo: self.backView.topAnchor, constant: 0),
+        self.stackView.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor, constant: 16),
+        self.stackView.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor, constant: -16),
+        self.stackView.bottomAnchor.constraint(equalTo: self.backView.bottomAnchor, constant: 0)
+     ].compactMap({ $0 }))
  }
     
- private func backViewConstraints() -> [NSLayoutConstraint] {
-     let topConstraint = self.backView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 0)
-     let leadingConstraint = self.backView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 0)
-     let trailingConstraint = self.backView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 0)
-     let bottomConstraint = self.backView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: 0)
-
-     return [
-         topConstraint, leadingConstraint, trailingConstraint, bottomConstraint
-     ]
- }
- 
- private func stackViewConstraints() -> [NSLayoutConstraint] {
-     let topConstraint = self.stackView.topAnchor.constraint(equalTo: self.backView.topAnchor, constant: 0)
-     let leadingConstraint = self.stackView.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor, constant: 16)
-     let trailingConstraint = self.stackView.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor, constant: -16)
-     let bottomConstraint = self.stackView.bottomAnchor.constraint(equalTo: self.backView.bottomAnchor, constant: 0)
-     return [
-         topConstraint, leadingConstraint, trailingConstraint, bottomConstraint
-     ]
- }
- 
 }
 extension PostTableViewCell: Setupable {
- 
- func setup(with viewModel: ViewModelProtocol) {
-    guard let viewModel = viewModel as? PostModel else { return }
-     
-     self.authorLabel.text = viewModel.author
+    
+    func setup(with viewModel: ViewModelProtocol) {
+        guard let viewModel = viewModel as? PostModel else { return }
+        
+        self.authorLabel.text = viewModel.author
      self.descriptionLabel.text = viewModel.description
      self.image.image = UIImage(named: "\(viewModel.image)")
      self.likesLabel.text = "Likes: \(String(viewModel.likes))"

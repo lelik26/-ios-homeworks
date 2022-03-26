@@ -51,7 +51,6 @@ class TabBarController: UITabBarController {
             case .profile:
                 return UINavigationController(rootViewController: LogInViewController())
         
-             
             }
         })
         self.viewControllers?.enumerated().forEach({ (index, vc) in

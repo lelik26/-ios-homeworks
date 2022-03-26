@@ -18,13 +18,15 @@ class ProfileViewController: UIViewController {
     
     private var dataSource: [ViewModelProtocol] = []
     
-    private lazy var tableView: UITableView = { // обьявляю таблвью
+    private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "MyCell")
+        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotoCell")
         tableView.backgroundColor = .white
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
@@ -32,17 +34,18 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadPublications()
+        self.loadPublications()
         self.setupNavigationBar()
         self.setupView()
         
     }
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
     }
     
-    private func setupNavigationBar() {
+    private func setupNavigationBar() {   // установка Navigation controller
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.title = "Профиль"
         
@@ -52,8 +55,8 @@ class ProfileViewController: UIViewController {
         self.view.backgroundColor = .white
         self.view.addSubview(self.tableView)
         
+        
         NSLayoutConstraint.activate([
-            
             self.tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
             self.tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
             self.tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
@@ -62,8 +65,6 @@ class ProfileViewController: UIViewController {
             
         ].compactMap({ $0 }))
     }
-    
-    // * Mark: установка datSourse публикаций
     
     private func loadPublications() {
         dataSource.append(PostTableViewCell.PostModel(
@@ -91,6 +92,7 @@ class ProfileViewController: UIViewController {
                 likes: 500, views: 501))
         
     }
+    
 }
 
 extension ProfileViewController: ProfileHeaderViewProtocol {
@@ -122,28 +124,55 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.dataSource.count
+        return self.dataSource.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath) as?
-                PostTableViewCell else {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
-                    return cell
-                }
-        let item = self.dataSource[indexPath.row]
-        let viewModel = PostTableViewCell.PostModel(author: item.author,
-                                                    description: item.description,
-                                                    image: item.image,
-                                                    likes: item.likes,
-                                                    views: item.views)
-        cell.setup(with: viewModel)
-        
-        
-        return cell
+        if indexPath.row == 0 {
+            let cellPhoto = tableView.dequeueReusableCell(withIdentifier: "PhotoCell", for: indexPath)
+            return cellPhoto
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath) as? PostTableViewCell else {
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
+                return cell
+            }
+            let item = self.dataSource[indexPath.row - 1]
+            let viewModel = PostTableViewCell.PostModel(author: item.author,
+                                                        description: item.description,
+                                                        image: item.image,
+                                                        likes: item.likes,
+                                                        views: item.views)
+            cell.setup(with: viewModel)
+            return cell
+        }
     }
     
+    func tableView( _ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            self.navigationController?.pushViewController(PhotosViewController(), animated: true)
+        } else { return }
+    }
     
 }
 
+
+
+
+
+
+    
+        
+       
+       
+      
+
+
+
+
+
+
+
+
+ 
+ 
