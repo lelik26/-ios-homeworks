@@ -17,14 +17,14 @@ class PostViewController: UIViewController {
         let view = UIView()
         view.backgroundColor = .clear
         view.contentMode = .scaleAspectFit
-        view.translatesAutoresizingMaskIntoConstraints = false
+        view.toAutoLayout()
         return view
     }()
     private lazy var myView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 45
         view.backgroundColor = .clear
-        view.translatesAutoresizingMaskIntoConstraints = false
+        view.toAutoLayout()
         return view
     }()
     
@@ -35,14 +35,14 @@ class PostViewController: UIViewController {
        imageView.layer.borderColor = UIColor.white.cgColor
        imageView.layer.cornerRadius = 45
        imageView.clipsToBounds = true
-       imageView.translatesAutoresizingMaskIntoConstraints = false
+       imageView.toAutoLayout()
        return imageView
    }()
    
    private lazy var alphaView: UIView = {
        let view = UIView()
        view.backgroundColor = .clear
-       view.translatesAutoresizingMaskIntoConstraints = false
+       view.toAutoLayout()
        return view
    }()
    
@@ -55,7 +55,7 @@ class PostViewController: UIViewController {
        button.setImage(.init(systemName: "xmark.circle"), for: .normal)
        button.addTarget(self, action: #selector(self.didTapCrossButton), for: .touchUpInside)
        button.backgroundColor = .systemRed
-       button.translatesAutoresizingMaskIntoConstraints = false
+       button.toAutoLayout()
        return button
    }()
    private let tapGestureRecogniger = UITapGestureRecognizer()
@@ -79,14 +79,10 @@ class PostViewController: UIViewController {
     
     private func setupView() {
         self.view.addSubview(self.backView)
-        self.backView.addSubview(myView)
-        self.backView.addSubview(alphaView)
-        self.backView.addSubview(crossButton)
+        self.backView.addSubviews(myView, alphaView, crossButton)
         self.myView.addSubview(self.avatarImageView)
-       
-        self.backView.bringSubviewToFront(alphaView)
-        self.backView.bringSubviewToFront(myView)
-        self.backView.bringSubviewToFront(crossButton)
+        self.backView.bringSubviews(alphaView, myView, crossButton)
+               
         self.myView.layer.cornerRadius = 45
         self.alphaView.alpha = 0
         
@@ -135,7 +131,7 @@ class PostViewController: UIViewController {
     @objc private func handleTapGesture (_ gestureRecognizer: UITapGestureRecognizer){
         guard self.tapGestureRecogniger === gestureRecognizer else { return }
         
-       self.isExpanded.toggle()  //в первой картинке
+        self.isExpanded.toggle()  //в первой картинке
         self.leftXConstraint?.constant = self.isExpanded ?  0 : 16
         self.topConstraint?.constant = self.isExpanded ?  (backView.bounds.height - UIScreen.main.bounds.width ) * 0.5  : 16
         
@@ -145,7 +141,7 @@ class PostViewController: UIViewController {
         UIView.animate(withDuration: 0.5) {
             self.myView.layer.cornerRadius = self.isExpanded ? 0 : 45
             self.avatarImageView.layer.cornerRadius = self.isExpanded ? 0 : 45
-            self.alphaView.alpha = self.isExpanded ? 0.7 : 0
+            self.alphaView.alpha = self.isExpanded ? 1 : 0
             self.view.layoutIfNeeded()
         } completion: { _ in
         }
@@ -156,12 +152,12 @@ class PostViewController: UIViewController {
           
         }
         
-        UIView.animate(withDuration: 0.3, delay: 0.5) {
+        UIView.animate(withDuration: 0.5 ){
             self.crossButton.alpha = self.isExpanded ? 1 : 0
 
         } completion: { _ in
             self.crossButton.isHidden = !self.isExpanded
-            
+           
         }
         
     }
@@ -174,15 +170,18 @@ class PostViewController: UIViewController {
         self.widthConstraint?.constant = self.isExpanded ?  90 : (UIScreen.main.bounds.width)
         self.heightConstraint?.constant = self.isExpanded ? 90 : (UIScreen.main.bounds.width)
         self.avatarImageView.layer.cornerRadius = 45
+
         
         UIView.animate(withDuration: 0.5) {
           self.myView.layer.cornerRadius = 45
             self.alphaView.alpha = 0
             self.view.layoutIfNeeded()
+    
         } completion: { _ in
+
         }
 
-        UIView.animate(withDuration: 0.3, delay: 0.5) {
+        UIView.animate(withDuration: 0.3) { //, delay: 0.5
             self.crossButton.alpha = 0
         } completion: { _ in
             self.crossButton.isHidden = false
@@ -192,7 +191,6 @@ class PostViewController: UIViewController {
     
     
     @objc func didTapTransitionInfoButton() {
-        let infoVC = InfoViewController()
-        self.navigationController?.pushViewController(infoVC, animated: true)
+        pushViewController(InfoViewController(),"назад")
     }
 }

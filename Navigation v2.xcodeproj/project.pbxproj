@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F53228ED27EB6D25005B8EFF /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53228EC27EB6D25005B8EFF /* String+extension.swift */; };
+		F53228ED27EB6D25005B8EFF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53228EC27EB6D25005B8EFF /* Extensions.swift */; };
 		F53228EF27EB6D40005B8EFF /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53228EE27EB6D40005B8EFF /* UIColor+extension.swift */; };
 		F53228F127EB6D5E005B8EFF /* Setupable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53228F027EB6D5E005B8EFF /* Setupable.swift */; };
 		F53228F427EB6D8E005B8EFF /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53228F327EB6D8E005B8EFF /* PostTableViewCell.swift */; };
@@ -29,7 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F53228EC27EB6D25005B8EFF /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
+		F53228EC27EB6D25005B8EFF /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F53228EE27EB6D40005B8EFF /* UIColor+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
 		F53228F027EB6D5E005B8EFF /* Setupable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setupable.swift; sourceTree = "<group>"; };
 		F53228F327EB6D8E005B8EFF /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
@@ -74,7 +74,7 @@
 		F53228EB27EB6CBC005B8EFF /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				F53228EC27EB6D25005B8EFF /* String+extension.swift */,
+				F53228EC27EB6D25005B8EFF /* Extensions.swift */,
 				F53228EE27EB6D40005B8EFF /* UIColor+extension.swift */,
 			);
 			path = Extensions;
@@ -288,7 +288,7 @@
 				F53228EF27EB6D40005B8EFF /* UIColor+extension.swift in Sources */,
 				F574FCA127DE14390017550B /* TabBarController.swift in Sources */,
 				F574FCA827DE15460017550B /* InfoViewController.swift in Sources */,
-				F53228ED27EB6D25005B8EFF /* String+extension.swift in Sources */,
+				F53228ED27EB6D25005B8EFF /* Extensions.swift in Sources */,
 				F53228F427EB6D8E005B8EFF /* PostTableViewCell.swift in Sources */,
 				F574FCAC27DE15E80017550B /* ProfileHeaderView.swift in Sources */,
 				F574FC8727DE0FD80017550B /* AppDelegate.swift in Sources */,

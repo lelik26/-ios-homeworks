@@ -12,22 +12,22 @@ class LogInViewController: UIViewController {
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .white
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.toAutoLayout()
         return scrollView
     }()
     
     private lazy var contentView: UIView = {
         let contentView = UIView()
         contentView.backgroundColor = .white
-       contentView.translatesAutoresizingMaskIntoConstraints = false
+       contentView.toAutoLayout()
         return contentView
     }()
     
-    private lazy var logoImageView: UIImageView = {    
+    private lazy var logoImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "logoVK.jpg"))
         imageView.layer.cornerRadius = 10
         imageView.clipsToBounds = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.toAutoLayout()
         return imageView
     }()
     
@@ -38,7 +38,7 @@ class LogInViewController: UIViewController {
         textField.autocapitalizationType = .none
         textField.font = .systemFont(ofSize: 16, weight: .regular)
         textField.textColor = .black
-        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.toAutoLayout()
         return textField
     }()
     
@@ -54,7 +54,7 @@ class LogInViewController: UIViewController {
         textField.tintColor = .tintColor
         textField.autocapitalizationType = .none
         textField.isSecureTextEntry = true
-        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.toAutoLayout()
         return textField
     }()
     
@@ -67,7 +67,7 @@ class LogInViewController: UIViewController {
         stackView.layer.borderColor = UIColor.lightGray.cgColor
         stackView.layer.borderWidth = 0.5
         stackView.spacing = 0
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.toAutoLayout()
         return stackView
     }()
     
@@ -79,18 +79,15 @@ class LogInViewController: UIViewController {
         button.setTitle("Log In", for: .normal)
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(self.didTransitionButton), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.toAutoLayout()
         return button
     }()
     
     private func drawSelf() {
         self.view.addSubview(self.scrollView)
         self.scrollView.addSubview(self.contentView)
-    
-        self.contentView.addSubview(self.logoImageView)
-        self.contentView.addSubview(self.stackLabelView)
-        self.contentView.addSubview(self.logoInButton)
-        
+        self.contentView.addSubviews(logoImageView, stackLabelView, logoInButton)
+            
         self.stackLabelView.addArrangedSubview(self.emailTextField)
         self.stackLabelView.addArrangedSubview(self.passwordTextField)
        
@@ -125,7 +122,7 @@ class LogInViewController: UIViewController {
             self.logoInButton.heightAnchor.constraint(equalToConstant: 50),
           
 
-        ].compactMap({ $0 }))
+        ])
     }
     
     override func viewDidLoad() {
@@ -144,14 +141,15 @@ class LogInViewController: UIViewController {
 
 
     @objc private func didTransitionButton() {
-        let profileVC = ProfileViewController()
-        navigationController?.pushViewController(profileVC, animated: true)
+        pushViewController(ProfileViewController(), "назад")
     }
     
 //   Mark: - Keyboard
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.showTabBar()
+    
     // подписаться на уведомления
     let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(kbdShow), name: UIResponder.keyboardWillShowNotification, object: nil)
