@@ -35,7 +35,7 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.loadPublications()
-        self.setupNavigationBar()
+        self.setupNavigationBar("Профиль")
         self.setupView()
         
     }
@@ -47,18 +47,12 @@ class ProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-       // navigationController?.setNavigationBarHidden(false, animated: animated)
+        self.showTabBar()
+        self.setupNavigationBar("Профиль")
+      
 
     }
-    
-    private func setupNavigationBar() {   // установка Navigation controller
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationItem.title = "Профиль"
-     //   self.tabBarController?.tabBar.isHidden = false
 
-        
-    }
-    
     private func setupView() {     //
         self.view.backgroundColor = .white
         self.view.addSubview(self.tableView)
@@ -160,8 +154,8 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView( _ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            self.navigationController?.pushViewController(PhotosViewController(), animated: true)
-            self.navigationItem.backButtonTitle = "назад"
+            self.pushViewController(PhotosViewController(), "назад")
+            
         } else { return }
     }
     

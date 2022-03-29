@@ -32,7 +32,7 @@ class PhotosViewController: UIViewController {
         collectionView.delegate = self
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "DefaultCell")
         collectionView.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: "CustomCell") // зарегистрировали ячейку и заполнили индефикатор и ниже переиспользуем ячейку
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.toAutoLayout()
         return collectionView
     }()
     
@@ -40,7 +40,8 @@ class PhotosViewController: UIViewController {
         super.viewDidLoad()
         self.loadPhotos()
         self.setupPhotoGallery()
-        self.setupNavigationBar()
+        self.setupNavigationBar("Photos Gallery")
+        self.hideTabBar()
         
     }
     
@@ -50,15 +51,10 @@ class PhotosViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
+       
     }
     
-    private func setupNavigationBar() {   // установка Navigation controller
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationItem.title = "Photos Gallery"
-       // self.tabBarController?.tabBar.isHidden = true
-        
-    }
+
     private func setupPhotoGallery() {
         
         self.view.backgroundColor = .systemGray6
@@ -107,7 +103,6 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DefaultCell", for: indexPath)
             return cell
         }
-      //  let itemPhoto = self.dataSource[indexPath.row]
         let photoModel = PhotosCollectionViewCell.PhotoModel(photo: dataSource[indexPath.row].photo)
         cell.setupPhoto(with: photoModel)
         cell.photoGalleryImageView.contentMode = .scaleAspectFill

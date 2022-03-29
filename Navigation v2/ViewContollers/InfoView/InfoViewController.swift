@@ -17,7 +17,7 @@ class InfoViewController: UIViewController {
         button.setTitle("Внимание Тревога ", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(alertClicked), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.toAutoLayout()
         return button
     }()
     override func viewDidLoad() {
