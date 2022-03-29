@@ -24,7 +24,7 @@ class PostTableViewCell: UITableViewCell {
      let view = UIView()
      view.backgroundColor = .white
      view.contentMode = .scaleAspectFit
-     view.translatesAutoresizingMaskIntoConstraints = false
+     view.toAutoLayout()
      return view
  }()
  
@@ -35,7 +35,7 @@ class PostTableViewCell: UITableViewCell {
      label.font = .systemFont(ofSize: 20, weight: .bold)
      label.textColor = .black
      label.text = " Автор:"
-     label.translatesAutoresizingMaskIntoConstraints = false
+     label.toAutoLayout() //translatesAutoresizingMaskIntoConstraints = false
      return label
  }()
    
@@ -46,7 +46,7 @@ class PostTableViewCell: UITableViewCell {
         imageView.frame.size.height = imageView.frame.size.width
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.toAutoLayout()
         return imageView
     }()
         
@@ -58,7 +58,7 @@ class PostTableViewCell: UITableViewCell {
         label.textColor = .systemGray
         label.textAlignment = NSTextAlignment.left
         label.text = "Описание: "
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.toAutoLayout()
         return label
     }()
 
@@ -68,7 +68,7 @@ class PostTableViewCell: UITableViewCell {
      label.font = .systemFont(ofSize: 16, weight: .regular)
      label.textColor = .black
      label.text = "Likes: "
-     label.translatesAutoresizingMaskIntoConstraints = false
+     label.toAutoLayout()
      return label
  }()
  
@@ -79,7 +79,7 @@ class PostTableViewCell: UITableViewCell {
      label.textColor = .black
      label.textAlignment = NSTextAlignment.right
      label.text = "Views: "
-     label.translatesAutoresizingMaskIntoConstraints = false
+     label.toAutoLayout()
      return label
  }()
  
@@ -89,7 +89,7 @@ class PostTableViewCell: UITableViewCell {
      stackView.backgroundColor = .white
      stackView.axis = .vertical
      stackView.spacing = 10
-     stackView.translatesAutoresizingMaskIntoConstraints = false
+     stackView.toAutoLayout()
      return stackView
  }()
  private lazy var infoStackView: UIStackView = {
@@ -97,7 +97,7 @@ class PostTableViewCell: UITableViewCell {
      stackView.axis = .horizontal
      stackView.spacing = 10
      stackView.distribution = .fillEqually
-     stackView.translatesAutoresizingMaskIntoConstraints = false
+     stackView.toAutoLayout()
      return stackView
  }()
  
@@ -136,11 +136,12 @@ class PostTableViewCell: UITableViewCell {
         self.backView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 0),
         self.backView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 0),
         self.backView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: 0),
+        
         self.stackView.topAnchor.constraint(equalTo: self.backView.topAnchor, constant: 0),
         self.stackView.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor, constant: 16),
         self.stackView.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor, constant: -16),
         self.stackView.bottomAnchor.constraint(equalTo: self.backView.bottomAnchor, constant: 0)
-     ].compactMap({ $0 }))
+     ])
  }
     
 }

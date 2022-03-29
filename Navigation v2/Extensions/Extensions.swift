@@ -5,16 +5,25 @@
 //  Created by Alex Alex on 23.03.2022.
 //
 
-import Foundation
+import UIKit
 
-extension String {
+public extension UIView {
 
-    func toDate(withFormat format: String = "yyyy-MM-dd'T'HH:mm:ssZ") -> Date? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone(identifier: "UTC")
-        dateFormatter.calendar = Calendar(identifier: .gregorian)
-        dateFormatter.dateFormat = format
-        let date = dateFormatter.date(from: self)
-        return date
+func toAutoLayout() {
+    translatesAutoresizingMaskIntoConstraints = false
+}
+
+func addSubviews(_ subviews: UIView...) {
+    subviews.forEach { addSubview($0) }
+    
+}
+    
+    func bringSubviews (_ subviews: UIView...){
+        subviews.forEach { bringSubviewToFront($0)}
+        
     }
 }
+
+
+
+

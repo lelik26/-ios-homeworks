@@ -21,7 +21,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFit
         imageView.layer.cornerRadius = 6
         imageView.clipsToBounds = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.toAutoLayout()
         return imageView
     }()
     
@@ -29,10 +29,13 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         self.contentView.addSubview(photoGalleryImageView)
+        
         NSLayoutConstraint.activate([
             self.photoGalleryImageView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
             self.photoGalleryImageView.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
-        ].compactMap({ $0 }))
+            self.photoGalleryImageView.heightAnchor.constraint(equalTo: contentView.heightAnchor),
+            self.photoGalleryImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor)
+        ])
     }
     
     required init?(coder: NSCoder) {

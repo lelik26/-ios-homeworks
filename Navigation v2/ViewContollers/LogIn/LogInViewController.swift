@@ -125,7 +125,7 @@ class LogInViewController: UIViewController {
             self.logoInButton.heightAnchor.constraint(equalToConstant: 50),
           
 
-        ].compactMap({ $0 }))
+        ])
     }
     
     override func viewDidLoad() {
@@ -146,6 +146,7 @@ class LogInViewController: UIViewController {
     @objc private func didTransitionButton() {
         let profileVC = ProfileViewController()
         navigationController?.pushViewController(profileVC, animated: true)
+        navigationItem.backButtonTitle = "назад"
     }
     
 //   Mark: - Keyboard

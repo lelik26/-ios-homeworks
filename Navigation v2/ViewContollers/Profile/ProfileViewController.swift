@@ -12,7 +12,7 @@ class ProfileViewController: UIViewController {
     private lazy var profileHeaderView: ProfileHeaderView = {
         let view = ProfileHeaderView(frame: .zero)
         view.delegate = self
-        view.translatesAutoresizingMaskIntoConstraints = false
+        view.toAutoLayout()
         return view
     }()
     
@@ -28,7 +28,7 @@ class ProfileViewController: UIViewController {
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "MyCell")
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotoCell")
         tableView.backgroundColor = .white
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.toAutoLayout()
         return tableView
     }()
     
@@ -45,9 +45,17 @@ class ProfileViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+       // navigationController?.setNavigationBarHidden(false, animated: animated)
+
+    }
+    
     private func setupNavigationBar() {   // установка Navigation controller
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.title = "Профиль"
+     //   self.tabBarController?.tabBar.isHidden = false
+
         
     }
     
@@ -59,11 +67,11 @@ class ProfileViewController: UIViewController {
         NSLayoutConstraint.activate([
             self.tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
             self.tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
-            self.tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
-            self.tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0)
+            self.tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            self.tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0)
             
             
-        ].compactMap({ $0 }))
+        ])
     }
     
     private func loadPublications() {
@@ -127,9 +135,11 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         return self.dataSource.count + 1
     }
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cellPhoto = tableView.dequeueReusableCell(withIdentifier: "PhotoCell", for: indexPath)
+            cellPhoto.contentMode = .scaleAspectFit
             return cellPhoto
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath) as? PostTableViewCell else {
@@ -151,6 +161,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView( _ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             self.navigationController?.pushViewController(PhotosViewController(), animated: true)
+            self.navigationItem.backButtonTitle = "назад"
         } else { return }
     }
     
