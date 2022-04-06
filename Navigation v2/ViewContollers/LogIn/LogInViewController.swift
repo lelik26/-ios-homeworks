@@ -83,10 +83,27 @@ class LogInViewController: UIViewController {
         return button
     }()
     
+    private lazy var alertLabel: UILabel = {
+        let label = UILabel()
+        label.layer.cornerRadius = 10
+        label.toAutoLayout()
+        label.backgroundColor = .white
+        label.numberOfLines = 0
+        label.textColor = .systemRed
+        label.font = .systemFont(ofSize: 16, weight: .regular)
+        label.text = "Внимание!"
+        label.textAlignment = .center
+        label.isHidden = false
+         return label
+    }()
+    
+    private let minLength = 6
+    private let maxLength = 64
+    
     private func drawSelf() {
         self.view.addSubview(self.scrollView)
         self.scrollView.addSubview(self.contentView)
-        self.contentView.addSubviews(logoImageView, stackLabelView, logoInButton)
+        self.contentView.addSubviews(logoImageView, stackLabelView, logoInButton, alertLabel)
             
         self.stackLabelView.addArrangedSubview(self.emailTextField)
         self.stackLabelView.addArrangedSubview(self.passwordTextField)
@@ -97,14 +114,14 @@ class LogInViewController: UIViewController {
             self.scrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 120),
             self.scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
             self.scrollView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-            self.scrollView.heightAnchor.constraint(equalToConstant: 386),//386
+           // self.scrollView.heightAnchor.constraint(equalToConstant: 436),//386
             
             self.contentView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor),
             self.contentView.topAnchor.constraint(equalTo: self.scrollView.topAnchor),
             self.contentView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor),
             self.contentView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor ),
             self.contentView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
-            self.contentView.heightAnchor.constraint(equalToConstant: 386),
+            self.contentView.heightAnchor.constraint(equalToConstant: 436),
             
             self.logoImageView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 0),
             self.logoImageView.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
@@ -120,6 +137,11 @@ class LogInViewController: UIViewController {
             self.logoInButton.leadingAnchor.constraint(equalTo: self.stackLabelView.leadingAnchor),
             self.logoInButton.trailingAnchor.constraint(equalTo: self.stackLabelView.trailingAnchor),
             self.logoInButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            self.alertLabel.topAnchor.constraint(equalTo: self.logoInButton.bottomAnchor, constant: 0),
+            self.alertLabel.leadingAnchor.constraint(equalTo: self.stackLabelView.leadingAnchor),
+            self.alertLabel.trailingAnchor.constraint(equalTo: self.stackLabelView.trailingAnchor),
+            self.alertLabel.heightAnchor.constraint(equalToConstant: 50)
           
 
         ])
@@ -129,6 +151,7 @@ class LogInViewController: UIViewController {
         super.viewDidLoad()
         self.drawSelf()
         self.view.backgroundColor = .white
+        setupTapGesture()
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(kbdShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         nc.addObserver(self, selector: #selector(kbdHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -188,3 +211,20 @@ class LogInViewController: UIViewController {
         }
 
 }
+
+
+extension LogInViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        return false
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+     
+        passwordTextField.resignFirstResponder()
+        emailTextField.resignFirstResponder()
+         // проверка на введение на корректность когда жмем ретерн
+        return true
+    }
+}
+

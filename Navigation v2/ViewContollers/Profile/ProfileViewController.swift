@@ -156,7 +156,17 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         if indexPath.row == 0 {
             self.pushViewController(PhotosViewController(), "назад")
             
-        } else { return }
+        } else {
+            
+            let item = dataSource[indexPath.row - 1]
+            let vc = DetailedPostViewController()
+            
+            vc.detailedName = item.author
+            vc.detailedImage = item.image
+            vc.detailedDescription = item.description
+            vc.detailedLike = item.likes
+            vc.detailedViews = item.views
+            self.pushViewController(vc, "назад") }
     }
     
 }

@@ -17,9 +17,9 @@ class ProfileHeaderView: UIView {
     var avatarImageView: UIImageView = {    // установка изображения
         let imageView = UIImageView(image: UIImage(named: "smurf.jpg"))
         imageView.backgroundColor = .clear
-        imageView.layer.borderWidth = 3.0
-        imageView.layer.borderColor = UIColor.white.cgColor
-        imageView.layer.cornerRadius = 45
+        imageView.borderWidth = 3.0
+        imageView.borderColor = .white
+        imageView.cornerRadius = 45
         imageView.clipsToBounds = true
         imageView.toAutoLayout()
         return imageView
@@ -54,7 +54,7 @@ class ProfileHeaderView: UIView {
     private lazy var setStatusButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .systemBlue
-        button.layer.cornerRadius = 4
+        button.cornerRadius = 4
         button.titleLabel?.textColor = .white
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 0.7
@@ -68,8 +68,6 @@ class ProfileHeaderView: UIView {
         return button
     }()
     
-    private var buttonTopConstraint: NSLayoutConstraint?
-    private var buttonPressTopConstraint: NSLayoutConstraint?// выносим констрейт в свойство и делаем опционально
     weak var delegate: ProfileHeaderViewProtocol?  // добавляем делегат
     
     private lazy var textField: UITextField = {
@@ -78,9 +76,9 @@ class ProfileHeaderView: UIView {
         textField.placeholder = statusLabel.text   //"Enter some status here"
         textField.textColor = .black
         textField.font = .systemFont(ofSize: 15, weight: .regular)
-        textField.layer.cornerRadius = 12
-        textField.layer.borderWidth = 1.0
-        textField.layer.borderColor = UIColor.black.cgColor
+        textField.cornerRadius = 12
+        textField.borderWidth = 1.0
+        textField.borderColor = .black
         textField.clipsToBounds = true
         textField.backgroundColor = .white
         textField.addTarget(self, action: #selector(statusTextChanged(_:) ), for: .editingChanged)
@@ -88,10 +86,13 @@ class ProfileHeaderView: UIView {
         return textField
     }()
     
+    private var statusText: String?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.drawSelf()
-       
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapDismiss)))
+        
     }
     
     required init?(coder: NSCoder) {
@@ -106,58 +107,74 @@ class ProfileHeaderView: UIView {
         self.stackLabelView.addArrangedSubview(self.fullNameLabel)
         self.stackLabelView.addArrangedSubview(self.statusLabel)
         
-        self.buttonTopConstraint = self.setStatusButton.topAnchor.constraint(equalTo: self.stackLabelView.bottomAnchor, constant: 34)
-        self.buttonTopConstraint?.priority = UILayoutPriority(rawValue: 999)
         
         NSLayoutConstraint.activate([
             self.avatarImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
             self.avatarImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             self.avatarImageView.heightAnchor.constraint(equalToConstant: 90),
             self.avatarImageView.heightAnchor.constraint(equalTo: self.avatarImageView.widthAnchor, multiplier: 1.0),
+            
             self.stackLabelView.topAnchor.constraint(equalTo: self.topAnchor, constant: 27),
             self.stackLabelView.leadingAnchor.constraint(equalTo: self.avatarImageView.trailingAnchor, constant: 10),
             self.stackLabelView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             self.stackLabelView.heightAnchor.constraint(equalToConstant: 61),
+            
+            self.textField.topAnchor.constraint(equalTo: self.stackLabelView.bottomAnchor, constant: 34),
+            self.textField.leadingAnchor.constraint(equalTo: self.statusLabel.leadingAnchor),
+            self.textField.trailingAnchor.constraint(equalTo: self.statusLabel.trailingAnchor),
+            self.textField.heightAnchor.constraint(equalToConstant: 40),
+            
             self.setStatusButton.leadingAnchor.constraint(equalTo: self.avatarImageView.leadingAnchor),
+            
             self.setStatusButton.trailingAnchor.constraint(equalTo: self.stackLabelView.trailingAnchor),
             self.setStatusButton.heightAnchor.constraint(equalToConstant: 50),
-            self.buttonTopConstraint
             
-        ].compactMap({ $0 })) // объявление всех constrait и активирует расчет
+            self.setStatusButton.topAnchor.constraint(equalTo: self.textField.bottomAnchor, constant: 10),
+            
+        ])
     }
-    @objc private func buttonPressed(_ button: UIButton) {
-        button.isSelected = !button.isSelected
+    @objc private func handleTapDismiss(){
+        textField.resignFirstResponder()
         
-        if self.textField.isHidden {
-            self.addSubview(self.textField)
-           
-            self.buttonTopConstraint?.isActive = false
-            self.buttonPressTopConstraint = self.setStatusButton.topAnchor.constraint(equalTo: self.stackLabelView.bottomAnchor, constant: 84)
-            self.buttonPressTopConstraint?.priority = UILayoutPriority(rawValue: 999)
-
-            NSLayoutConstraint.activate([
-                
-                self.textField.topAnchor.constraint(equalTo: self.stackLabelView.bottomAnchor, constant: 34),
-                self.textField.leadingAnchor.constraint(equalTo: self.statusLabel.leadingAnchor),
-                self.textField.trailingAnchor.constraint(equalTo: self.statusLabel.trailingAnchor),
-                self.textField.heightAnchor.constraint(equalToConstant: 40),
-                self.buttonPressTopConstraint
-            ].compactMap({ $0 }))
-        }
-               else {
-                   self.buttonPressTopConstraint?.isActive = false
-                   self.buttonTopConstraint?.isActive = true
-                   textField.removeFromSuperview()
-              }
-        
-        self.delegate?.buttonPressed(textFieldIsVisible: self.textField.isHidden) { [weak self] in
-        self?.textField.isHidden.toggle()
-        }
     }
     
-    private var statusText: String?
+    @objc private func buttonPressed(_ button: UIButton) {
+        
+        button.isSelected = !button.isSelected
+    textField.isHidden = false
+        guard let status = textField.text else {return}
+        
+        if !status.isEmpty {
+            UIView.animate(withDuration: 0.5) {
+                self.textField.text = self.statusLabel.text
+                self.textField.text = .none
+                button.isSelected = true
+                
+            } completion: { _ in
+            }
+        }
+        if status.isEmpty {
+            UIView.animate(withDuration: 0.5) { [self] in
+                self.textField.isHidden = false
+                self.textField.borderColor = .red
+                self.textField.borderWidth = 2
+                button.isSelected = false
+                
+            } completion: { _ in
+            }
+           
+            
+        } else {
+            textField.borderColor = .black
+            textField.borderWidth = 0.5
+            endEditing(true)
+            
+        }
+
+    }
+    
     @objc private func statusTextChanged (_ textField: UITextField) {
-      
+        
         statusText = textField.text!
         statusLabel.text = statusText
     }
