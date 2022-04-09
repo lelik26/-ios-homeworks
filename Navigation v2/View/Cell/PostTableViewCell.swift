@@ -8,7 +8,9 @@
 import UIKit
 
 class PostTableViewCell: UITableViewCell {
- 
+    
+    var likesDelegate: ClickLikesLabelDelegate?
+    
     struct PostModel: ViewModelProtocol {
         
 
@@ -68,6 +70,9 @@ class PostTableViewCell: UITableViewCell {
      label.font = .systemFont(ofSize: 16, weight: .regular)
      label.textColor = .black
      label.text = "Likes: "
+     let tap = UITapGestureRecognizer(target: self, action: #selector(taplikesLabel))
+     label.toInteraction()
+     label.addGestureRecognizer(tap)
      label.toAutoLayout()
      return label
  }()
@@ -156,5 +161,8 @@ extension PostTableViewCell: Setupable {
      self.likesLabel.text = "Likes: \(String(viewModel.likes))"
      self.viewsLabel.text = "Views: \(String(viewModel.views))"
  }
+    @objc func taplikesLabel() {
+        likesDelegate?.clickLikesLabel()
+    }
 }
 

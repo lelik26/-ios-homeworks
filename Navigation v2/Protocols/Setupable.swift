@@ -31,3 +31,7 @@ protocol SetupablePhotos {
     func setupPhoto(with photoModel: PhotosProtocol)
     
 }
+
+protocol ClickLikesLabelDelegate: AnyObject {
+    func clickLikesLabel()
+}

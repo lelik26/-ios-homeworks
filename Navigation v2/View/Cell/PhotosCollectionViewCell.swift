@@ -19,7 +19,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         let imageView = UIImageView(image: UIImage(named: photoNameArray[0]))
         imageView.backgroundColor = .white
         imageView.contentMode = .scaleAspectFit
-        imageView.layer.cornerRadius = 6
+        imageView.cornerRadius = 6
         imageView.clipsToBounds = true
         imageView.toAutoLayout()
         return imageView

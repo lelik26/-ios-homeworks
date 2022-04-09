@@ -60,7 +60,7 @@ class PhotosViewController: UIViewController {
    // Mark: - создание кнопки крестик
    private lazy var crossButton: UIButton = {
        let button = UIButton()
-       button.layer.cornerRadius = 20
+       button.cornerRadius = 20
        button.alpha = 0
        button.clipsToBounds = true
        button.setImage(.init(systemName: "xmark.circle"), for: .normal)
@@ -92,7 +92,6 @@ class PhotosViewController: UIViewController {
        
     }
     
-
     private func setupPhotoGallery() {
         
         self.view.backgroundColor = .systemGray6
@@ -107,19 +106,23 @@ class PhotosViewController: UIViewController {
             self.collectionView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 4),
             self.collectionView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -4),
             self.collectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
+            
             forPhotoView.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor),
-            forPhotoView.centerYAnchor.constraint(equalTo: collectionView.centerYAnchor),
+            forPhotoView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
             forPhotoView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width), //UIScreen.main.bounds.width
             forPhotoView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
+            
             photoImageView.centerXAnchor.constraint(equalTo: forPhotoView.centerXAnchor),
             photoImageView.centerYAnchor.constraint(equalTo: forPhotoView.centerYAnchor),
             photoImageView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
             photoImageView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
+           
             alphaView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             alphaView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             alphaView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
             alphaView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
-            crossButton.topAnchor.constraint(equalTo: forPhotoView.topAnchor, constant: 10),
+            
+            crossButton.topAnchor.constraint(equalTo: forPhotoView.topAnchor, constant: -80),
             crossButton.trailingAnchor.constraint(equalTo: forPhotoView.trailingAnchor, constant: -10),
             crossButton.heightAnchor.constraint(equalToConstant: 40),
             crossButton.widthAnchor.constraint(equalToConstant: 40)
@@ -129,8 +132,7 @@ class PhotosViewController: UIViewController {
         
     }
     private func itemSize (for width:  CGFloat, with spacing: CGFloat) -> CGSize {
-        // функция где хотим использовать 3 элемента в ряду : Получаем ширину ячейки и расстоянием между ячеек
-        
+      
         let itemWidth = (UIScreen.main.bounds.width / Constants.itemCount - 2 * spacing)
         return CGSize(width: itemWidth, height: itemWidth)
     }
@@ -173,31 +175,34 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
        photoImageView.photoGalleryImageView.image =  UIImage(named: photoNameArray[indexPath.row])
     
         self.isExpanded.toggle()
+        self.forPhotoView.alpha = self.isExpanded ? 1 : 0
+      
 
     UIView.animate(withDuration: 0.5) {
-        self.forPhotoView.alpha = self.isExpanded ? 1 : 0
-        self.alphaView.alpha = self.isExpanded ? 1 : 0
+       // self.forPhotoView.alpha = self.isExpanded ? 1 : 0
+        self.alphaView.alpha = self.isExpanded ? 0.7 : 0
         self.view.layoutIfNeeded()
     } completion: { _ in
     }
 
     if self.isExpanded {
         self.alphaView.isHidden = false
-        self.crossButton.isHidden = false
+       
     }
 
-    UIView.animate(withDuration: 0.5) { //, delay: 0.3
-        self.crossButton.alpha = self.isExpanded ? 1 : 0
-    } completion: { _ in
+        UIView.animate(withDuration: 0.5, delay: 0.3) { //, delay: 0.3
+        
+            self.crossButton.alpha = self.isExpanded ? 1 : 0
+        
+            self.crossButton.isHidden = false
+ 
+        } completion: { _ in
         self.crossButton.isHidden = !self.isExpanded
     }
     }
-   
 
-    
-       
-    
     @objc private func didTapCrossButton() {
+      
         UIView.animate(withDuration: 0.5) {
             self.forPhotoView.alpha = self.isExpanded ? 0 : 1
             self.alphaView.alpha = self.isExpanded ? 0 : 0.7
@@ -206,19 +211,20 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
 
         }
 
-
         UIView.animate(withDuration: 0.3) {
             self.crossButton.alpha = self.isExpanded ? 0 : 1
         } completion: { _ in
             self.crossButton.isHidden = false
             self.isExpanded = false
         }
-
-        
     }
+}
+   
 
     
-}
+       
+    
+   
     
 
 

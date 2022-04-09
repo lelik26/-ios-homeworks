@@ -22,7 +22,7 @@ class PostViewController: UIViewController {
     }()
     private lazy var myView: UIView = {
         let view = UIView()
-        view.layer.cornerRadius = 45
+        view.cornerRadius = 45
         view.backgroundColor = .clear
         view.toAutoLayout()
         return view
@@ -31,9 +31,9 @@ class PostViewController: UIViewController {
    var avatarImageView: UIImageView = {    // установка изображения
        let imageView = UIImageView(image: UIImage(named: "smurf.jpg"))
        imageView.backgroundColor = .clear
-       imageView.layer.borderWidth = 3.0
-       imageView.layer.borderColor = UIColor.white.cgColor
-       imageView.layer.cornerRadius = 45
+       imageView.borderWidth = 3.0
+       imageView.borderColor = .white
+       imageView.cornerRadius = 45
        imageView.clipsToBounds = true
        imageView.toAutoLayout()
        return imageView
@@ -49,7 +49,7 @@ class PostViewController: UIViewController {
    // Mark: - создание кнопки крестик
    private lazy var crossButton: UIButton = {
        let button = UIButton()
-       button.layer.cornerRadius = 20
+       button.cornerRadius = 20
        button.alpha = 0
        button.clipsToBounds = true
        button.setImage(.init(systemName: "xmark.circle"), for: .normal)
@@ -83,7 +83,7 @@ class PostViewController: UIViewController {
         self.myView.addSubview(self.avatarImageView)
         self.backView.bringSubviews(alphaView, myView, crossButton)
                
-        self.myView.layer.cornerRadius = 45
+        self.myView.cornerRadius = 45
         self.alphaView.alpha = 0
         
         self.leftXConstraint = self.myView.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor, constant: 16)
@@ -139,8 +139,8 @@ class PostViewController: UIViewController {
         self.heightConstraint?.constant = self.isExpanded ? (UIScreen.main.bounds.width) : 90
         
         UIView.animate(withDuration: 0.5) {
-            self.myView.layer.cornerRadius = self.isExpanded ? 0 : 45
-            self.avatarImageView.layer.cornerRadius = self.isExpanded ? 0 : 45
+            self.myView.cornerRadius = self.isExpanded ? 0 : 45
+            self.avatarImageView.cornerRadius = self.isExpanded ? 0 : 45
             self.alphaView.alpha = self.isExpanded ? 1 : 0
             self.view.layoutIfNeeded()
         } completion: { _ in
@@ -169,11 +169,11 @@ class PostViewController: UIViewController {
         
         self.widthConstraint?.constant = self.isExpanded ?  90 : (UIScreen.main.bounds.width)
         self.heightConstraint?.constant = self.isExpanded ? 90 : (UIScreen.main.bounds.width)
-        self.avatarImageView.layer.cornerRadius = 45
+        self.avatarImageView.cornerRadius = 45
 
         
         UIView.animate(withDuration: 0.5) {
-          self.myView.layer.cornerRadius = 45
+          self.myView.cornerRadius = 45
             self.alphaView.alpha = 0
             self.view.layoutIfNeeded()
     

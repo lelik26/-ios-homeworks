@@ -7,6 +7,37 @@
 
 import UIKit
 
+extension String {
+    
+    enum  ValidTypes {
+        
+        case email
+        case password
+    }
+    
+    enum Regex: String {
+        case email = "[A-Z0-9a-z._%+-]+@[a-zA-Z]+\\.[a-zA-Z]{2,100}"// Буквы из нижнего и верхнего регистра
+
+        case password = "(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*_?|±])[a-zA-Z0\\d!@#$%^&*_?|±].{6,100}"
+    }
+    
+    func isValid(validType: ValidTypes) -> Bool {
+        let format = "SELF MATCHES %@"  // вводим формат для сравнения c соотвествующего регулярного выражения для Predicate
+        var regex = ""
+        switch validType {
+     
+        case .email: regex = Regex.email.rawValue
+        case .password: regex = Regex.password.rawValue
+            
+            
+        }
+        
+        return NSPredicate(format: format, regex).evaluate(with: self)
+        
+    }
+}
+
+
 extension UIColor {
 
     convenience init(hexString: String, alpha: CGFloat = 1.0) {

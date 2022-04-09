@@ -12,7 +12,7 @@ class FeedViewController: UIViewController {
 
     private lazy var transitionButtonFirst: UIButton = {
         let button = UIButton()
-        button.layer.cornerRadius = 10
+        button.cornerRadius = 10
         button.clipsToBounds = true
         button.backgroundColor = .systemRed
         button.setTitle("Жесты и Анимация", for: .normal)
@@ -24,7 +24,7 @@ class FeedViewController: UIViewController {
     
     private lazy var transitionButtonSecond: UIButton = {
         let button = UIButton()
-        button.layer.cornerRadius = 10
+        button.cornerRadius = 10
         button.clipsToBounds = true
         button.backgroundColor = .systemGreen
         button.setTitle("ButtonSecond", for: .normal)

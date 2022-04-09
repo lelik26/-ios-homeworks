@@ -11,7 +11,7 @@ class InfoViewController: UIViewController {
 
     private lazy var transitionButtonAlert: UIButton = {
         let button = UIButton()
-        button.layer.cornerRadius = 20
+        button.cornerRadius = 20
         button.clipsToBounds = true
         button.backgroundColor = .systemRed
         button.setTitle("Внимание Тревога ", for: .normal)

@@ -78,11 +78,14 @@ class PhotosTableViewCell: UITableViewCell {
         for i in 0...3 {
             let image = UIImageView(image: UIImage(named: "\(photoNameArray[i])"))
             image.backgroundColor = .white
+//            Mark:- проверить необходимость
             image.frame.size.height = (UIScreen.main.bounds.width - 48) / 4
             image.frame.size.width = image.frame.size.height
-            image.layer.cornerRadius = 6
+//            __________
+            
+            image.cornerRadius = 6
             image.clipsToBounds = true
-            image.translatesAutoresizingMaskIntoConstraints = false
+            image.toAutoLayout()
             self.photoStackView.addArrangedSubview(image)
         }
 
