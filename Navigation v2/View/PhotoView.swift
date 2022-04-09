@@ -19,9 +19,7 @@ class PhotoView: UIView {
     var photoImage: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "images 10"))
         imageView.backgroundColor = .clear
-        // imageView.layer.borderWidth = 3.0
-        imageView.layer.borderColor = UIColor.white.cgColor
-        // imageView.layer.cornerRadius = 45
+        imageView.borderColor = .white
         imageView.clipsToBounds = true
         imageView.toAutoLayout()
         return imageView
@@ -34,30 +32,22 @@ class PhotoView: UIView {
         return view
     }()
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setupPhotoView()
-        
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-        
     }
     
     private func setupPhotoView() {
-        
         addSubviews(forImageView, alphaView)
         self.forImageView.addSubview(photoImage)
         bringSubviews(alphaView, forImageView )
         self.alphaView.alpha = 0
         
-        
-        
         NSLayoutConstraint.activate([
-            
             
             self.photoImage.topAnchor.constraint(equalTo: forImageView.topAnchor),
             self.photoImage.bottomAnchor.constraint(equalTo: forImageView.bottomAnchor),
@@ -71,6 +61,4 @@ class PhotoView: UIView {
             
         ].compactMap({ $0 }))
     }
-    
-    
 }

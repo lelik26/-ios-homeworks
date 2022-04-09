@@ -17,7 +17,7 @@ extension String {
     
     enum Regex: String {
         case email = "[A-Z0-9a-z._%+-]+@[a-zA-Z]+\\.[a-zA-Z]{2,100}"// Буквы из нижнего и верхнего регистра
-
+        
         case password = "(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*_?|±])[a-zA-Z0\\d!@#$%^&*_?|±].{6,100}"
     }
     
@@ -25,7 +25,7 @@ extension String {
         let format = "SELF MATCHES %@"  // вводим формат для сравнения c соотвествующего регулярного выражения для Predicate
         var regex = ""
         switch validType {
-     
+            
         case .email: regex = Regex.email.rawValue
         case .password: regex = Regex.password.rawValue
             
@@ -39,7 +39,7 @@ extension String {
 
 
 extension UIColor {
-
+    
     convenience init(hexString: String, alpha: CGFloat = 1.0) {
         let hexString: String = hexString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         let scanner = Scanner(string: hexString)
@@ -60,7 +60,7 @@ extension UIColor {
 }
 
 extension String {
-
+    
     func toDate(withFormat format: String = "yyyy-MM-dd'T'HH:mm:ssZ") -> Date? {
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone(identifier: "UTC")

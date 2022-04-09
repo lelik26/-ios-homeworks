@@ -8,8 +8,8 @@
 import UIKit
 
 class FeedViewController: UIViewController {
-
-
+    
+    
     private lazy var transitionButtonFirst: UIButton = {
         let button = UIButton()
         button.cornerRadius = 10
@@ -42,7 +42,7 @@ class FeedViewController: UIViewController {
         stackView.toAutoLayout()
         return stackView
     }()
-   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupNavigationBar("Лента")
@@ -64,7 +64,7 @@ class FeedViewController: UIViewController {
             self.stackButtonView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             self.stackButtonView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             self.stackButtonView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
-
+            
         ])
         
     }

@@ -11,8 +11,8 @@ class ProfileViewController: UIViewController {
     
     private let profileHeaderView = ProfileHeaderView()
     
-    lazy var avatar: UIImageView = {    // установка изображения
-        let imageView = UIImageView(image: UIImage(named: "smurf.jpg"))
+    lazy var avatar: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "iVAN"))
         imageView.backgroundColor = .black
         imageView.borderWidth = 3.0
         imageView.borderColor = .white
@@ -27,8 +27,7 @@ class ProfileViewController: UIViewController {
         view.toAutoLayout()
         return view
     }()
-    
-    // Mark: - создание кнопки крестик
+ 
     private lazy var crossButton: UIButton = {
         let button = UIButton()
         button.cornerRadius = 20
@@ -75,6 +74,7 @@ class ProfileViewController: UIViewController {
         self.setupDataSource()
         self.setupGesture()
         self.setupAlphaView()
+        
     }
     
     override func viewWillLayoutSubviews() {
@@ -87,33 +87,13 @@ class ProfileViewController: UIViewController {
         self.setupNavigationBar("Профиль")
     }
     private func setupDataSource() {
-        
-        dataSource.append(PostTableViewCell.PostModel(
-            author: "Ведьмак",
-            description: "Компьютерная игра, которая иммет больше всех наград,Главный герой сериала – ведьмак Геральт, охотник за опасными монстрами, угрожающими человеческому роду. Природа его силы исходит из мутаций, которым он подвергся в детстве: Геральт обрёл ускоренный метаболизм, быструю реакцию и нечеловеческую выносливость. Согласно официальному синопсису, сюжет сериала сфокусируется на истории Геральта, пытающегося отыскать своё место в мире, в котором люди часто оказываются более злыми, чем звери.",
-            image: "Ведьмак",
-            likes: 120, views: 240))
-        dataSource.append(
-            PostTableViewCell.PostModel(
-                author: "Нетология. Меняем карьеру через образование.",
-                description: "от Hello Word до первого сложного IOS - приложения, В каждом есть сила и талант, чтобы добиваться больших целей. Мы помогаем найти путь развития и реализовать себя через профессию — так, как вам этого хочется,Мы поддерживаем в течение всего обучения. Наши кураторы, эксперты и аспиранты не дают студентам сойти с дистанции. Кроме того, мы помогаем с трудоустройством: собрать портфолио, оформить резюме и пройти собеседование. Лучшие студенты стажируются у наших партнёров. ",
-                image: "Нетология",
-                likes: 20, views: 40))
-        dataSource.append(
-            PostTableViewCell.PostModel(
-                author: "Университет Синергия",
-                description: "Наша миссия — синергия многолетних академических традиций и современных образовательных технологий.Уже более 30 лет мы готовим профессионалов, обладающих набором практических знаний и навыков как для запуска и развития собственного бизнеса, так и для работы на управленческих должностях в крупных компаниях.Наша цель — сделать качественное образование доступным каждому.",
-                image: "Synergia",
-                likes: 120, views: 240))
-        dataSource.append(
-            PostTableViewCell.PostModel(
-                author: "Смурф",
-                description: "Смурфы живут в лесу, в средневековой Европе, приблизительно на побережье западной Ирландии (ландштафт в сериале и комиксах наиболее похожий на тен на полуострове Айверах). Поскольку из 6 Смурфов можно сделать золото, Смурфов постоянно пытаются поймать их неприятели, особенно Гаргамель. Смурфы также должны решить и много других проблем в своей деревне и рады всем помогать, даже своим неприятелям.",
-                image: "smurf",
-                likes: 500, views: 501))
+        dataSource.append(publication1)
+        dataSource.append(publication2)
+        dataSource.append(publication3)
+        dataSource.append(publication4)
     }
     
-    private func setupView() {     //
+    private func setupView() {
         self.view.backgroundColor = .white
         self.view.addSubview(self.tableView)
         
@@ -144,14 +124,10 @@ class ProfileViewController: UIViewController {
             self.alphaView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
             self.alphaView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
             
-            // Mark:- размеры кнопки
-            
             self.crossButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
             self.crossButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             self.crossButton.heightAnchor.constraint(equalToConstant: 40),
             self.crossButton.widthAnchor.constraint(equalToConstant: 40),
-            
-            // Mark:- размеры аватара
             
             self.leftXConstraint,
             self.topConstraint,
@@ -202,8 +178,7 @@ class ProfileViewController: UIViewController {
         
         self.widthConstraint?.constant = self.isExpanded ?  90 : (UIScreen.main.bounds.width)
         self.heightConstraint?.constant = self.isExpanded ? 90 :  (UIScreen.main.bounds.width)
-        self.avatar.cornerRadius = avatar.bounds.height / 2
-        
+       
         UIView.animate(withDuration: 0.5) {
             
             self.avatar.cornerRadius = self.avatar.bounds.height / 2
@@ -211,7 +186,7 @@ class ProfileViewController: UIViewController {
             self.view.layoutIfNeeded()
         } completion: { _ in }
         
-        UIView.animate(withDuration: 0.3) { //, delay: 0.5
+        UIView.animate(withDuration: 0.3) { 
             self.crossButton.alpha = 0
         } completion: { _ in
             self.crossButton.isHidden = false
@@ -247,16 +222,15 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate, Cli
                 return cell
             }
             cell.likesDelegate = self
-            var item = self.dataSource[indexPath.row - 1]
             if isLiked {
-                item.likes += 1
+                dataSource[indexPath.row - 1].likes += 1
                 isLiked.toggle()
             }
-            let viewModel = PostTableViewCell.PostModel(author: item.author,
-                                                        description: item.description,
-                                                        image: item.image,
-                                                        likes: item.likes,
-                                                        views: item.views)
+            let viewModel = PostTableViewCell.PostModel(author: dataSource[indexPath.row - 1].author,
+                                                        description: dataSource[indexPath.row - 1].description,
+                                                        image: dataSource[indexPath.row - 1].image,
+                                                        likes: dataSource[indexPath.row - 1].likes,
+                                                        views: dataSource[indexPath.row - 1].views)
             cell.setup(with: viewModel)
             return cell
         }
@@ -267,13 +241,12 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate, Cli
             self.pushViewController(PhotosViewController(), "назад")
         } else {
             let vc = DetailedPostViewController()
-            var item = dataSource[indexPath.row - 1]
-            vc.detailedName = item.author
-            vc.detailedImage = item.image
-            vc.detailedDescription = item.description
-            vc.detailedLike = item.likes
-            vc.detailedViews = item.views + 1
-            item.views += 1
+            vc.detailedName = dataSource[indexPath.row - 1].author
+            vc.detailedImage = dataSource[indexPath.row - 1].image
+            vc.detailedDescription = dataSource[indexPath.row - 1].description
+            vc.detailedLike = dataSource[indexPath.row - 1].likes
+            vc.detailedViews = dataSource[indexPath.row - 1].views + 1
+            dataSource[indexPath.row - 1].views += 1
             self.tableView.reloadRows(at: [indexPath], with: .none)
             self.pushViewController(vc, "назад")
         }

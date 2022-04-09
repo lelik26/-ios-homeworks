@@ -47,7 +47,6 @@ class InfoViewController: UIViewController {
         alert.addAction(agreeButton)
         alert.addAction(disagreeButton)
         present(alert, animated: true, completion: nil)
-       // print("alert work")
     }
 
 }

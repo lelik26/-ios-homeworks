@@ -11,8 +11,6 @@ class PostViewController: UIViewController {
     
     var post: Post?
     
-    // Mark: - создание прозрачной view
-    
     private lazy var backView: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
@@ -28,44 +26,43 @@ class PostViewController: UIViewController {
         return view
     }()
     
-   var avatarImageView: UIImageView = {    // установка изображения
-       let imageView = UIImageView(image: UIImage(named: "smurf.jpg"))
-       imageView.backgroundColor = .clear
-       imageView.borderWidth = 3.0
-       imageView.borderColor = .white
-       imageView.cornerRadius = 45
-       imageView.clipsToBounds = true
-       imageView.toAutoLayout()
-       return imageView
-   }()
-   
-   private lazy var alphaView: UIView = {
-       let view = UIView()
-       view.backgroundColor = .clear
-       view.toAutoLayout()
-       return view
-   }()
-   
-   // Mark: - создание кнопки крестик
-   private lazy var crossButton: UIButton = {
-       let button = UIButton()
-       button.cornerRadius = 20
-       button.alpha = 0
-       button.clipsToBounds = true
-       button.setImage(.init(systemName: "xmark.circle"), for: .normal)
-       button.addTarget(self, action: #selector(self.didTapCrossButton), for: .touchUpInside)
-       button.backgroundColor = .systemRed
-       button.toAutoLayout()
-       return button
-   }()
-   private let tapGestureRecogniger = UITapGestureRecognizer()
-   
-   private var leftXConstraint: NSLayoutConstraint?
-   private var widthConstraint: NSLayoutConstraint?
-   private var heightConstraint: NSLayoutConstraint?
-   private var topConstraint: NSLayoutConstraint?
+    var avatarImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "iVAN"))
+        imageView.backgroundColor = .clear
+        imageView.borderWidth = 3.0
+        imageView.borderColor = .white
+        imageView.cornerRadius = 45
+        imageView.clipsToBounds = true
+        imageView.toAutoLayout()
+        return imageView
+    }()
+    
+    private lazy var alphaView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        view.toAutoLayout()
+        return view
+    }()
 
-   private var isExpanded = false
+    private lazy var crossButton: UIButton = {
+        let button = UIButton()
+        button.cornerRadius = 20
+        button.alpha = 0
+        button.clipsToBounds = true
+        button.setImage(.init(systemName: "xmark.circle"), for: .normal)
+        button.addTarget(self, action: #selector(self.didTapCrossButton), for: .touchUpInside)
+        button.backgroundColor = .systemRed
+        button.toAutoLayout()
+        return button
+    }()
+    private let tapGestureRecogniger = UITapGestureRecognizer()
+    
+    private var leftXConstraint: NSLayoutConstraint?
+    private var widthConstraint: NSLayoutConstraint?
+    private var heightConstraint: NSLayoutConstraint?
+    private var topConstraint: NSLayoutConstraint?
+    
+    private var isExpanded = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,7 +79,7 @@ class PostViewController: UIViewController {
         self.backView.addSubviews(myView, alphaView, crossButton)
         self.myView.addSubview(self.avatarImageView)
         self.backView.bringSubviews(alphaView, myView, crossButton)
-               
+        
         self.myView.cornerRadius = 45
         self.alphaView.alpha = 0
         
@@ -90,7 +87,7 @@ class PostViewController: UIViewController {
         self.topConstraint = self.myView.topAnchor.constraint(equalTo: self.backView.topAnchor, constant: 16)
         self.heightConstraint = myView.heightAnchor.constraint(equalToConstant: 90)
         self.widthConstraint =  self.myView.widthAnchor.constraint(equalToConstant: 90)
-
+        
         
         NSLayoutConstraint.activate([
             
@@ -98,7 +95,7 @@ class PostViewController: UIViewController {
             self.backView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor ,constant: 0),
             self.backView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
             self.backView.trailingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.trailingAnchor,constant: 0),
-
+            
             self.avatarImageView.topAnchor.constraint(equalTo: myView.topAnchor),
             self.avatarImageView.bottomAnchor.constraint(equalTo: myView.bottomAnchor),
             self.avatarImageView.leadingAnchor.constraint(equalTo: myView.leadingAnchor),
@@ -131,7 +128,7 @@ class PostViewController: UIViewController {
     @objc private func handleTapGesture (_ gestureRecognizer: UITapGestureRecognizer){
         guard self.tapGestureRecogniger === gestureRecognizer else { return }
         
-        self.isExpanded.toggle()  //в первой картинке
+        self.isExpanded.toggle()
         self.leftXConstraint?.constant = self.isExpanded ?  0 : 16
         self.topConstraint?.constant = self.isExpanded ?  (backView.bounds.height - UIScreen.main.bounds.width ) * 0.5  : 16
         
@@ -149,39 +146,39 @@ class PostViewController: UIViewController {
         if self.isExpanded {
             self.alphaView.isHidden = false
             self.crossButton.isHidden = false
-          
+            
         }
         
         UIView.animate(withDuration: 0.5 ){
             self.crossButton.alpha = self.isExpanded ? 1 : 0
-
+            
         } completion: { _ in
             self.crossButton.isHidden = !self.isExpanded
-           
+            
         }
         
     }
     
     @objc private func didTapCrossButton() {
-       
+        
         self.leftXConstraint?.constant = self.isExpanded ?  16 :  (UIScreen.main.bounds.width) / 2
         self.topConstraint?.constant = self.isExpanded ?   16 :  (UIScreen.main.bounds.height) / 2
         
         self.widthConstraint?.constant = self.isExpanded ?  90 : (UIScreen.main.bounds.width)
         self.heightConstraint?.constant = self.isExpanded ? 90 : (UIScreen.main.bounds.width)
         self.avatarImageView.cornerRadius = 45
-
+        
         
         UIView.animate(withDuration: 0.5) {
-          self.myView.cornerRadius = 45
+            self.myView.cornerRadius = 45
             self.alphaView.alpha = 0
             self.view.layoutIfNeeded()
-    
+            
         } completion: { _ in
-
+            
         }
-
-        UIView.animate(withDuration: 0.3) { //, delay: 0.5
+        
+        UIView.animate(withDuration: 0.3) {
             self.crossButton.alpha = 0
         } completion: { _ in
             self.crossButton.isHidden = false

@@ -13,7 +13,7 @@ protocol ViewModelProtocol {
     var image: String {get set} // имя картинки из каталога Assets.xcassets
     var likes: Int {get set}  //количество лайков
     var views: Int {get set}// количество просмотров
-   
+    
 }
 
 protocol Setupable {

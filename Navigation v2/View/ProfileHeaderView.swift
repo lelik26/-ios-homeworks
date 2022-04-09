@@ -7,28 +7,23 @@
 
 import UIKit
 
-//protocol ProfileHeaderViewProtocol: AnyObject { // добавляем протокол с функцией didTapStatusButton с активным текстовым полем
-//    func buttonPressed(textFieldIsVisible: Bool, completion: @escaping () -> Void)
-//}
-
 class ProfileHeaderView: UIView {
     
-    //private lazy
-   lazy var avatarImageView: UIImageView = {    // установка изображения
-        let imageView = UIImageView(image: UIImage(named: "smurf.jpg"))
+    lazy var avatarImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "iVAN"))
         imageView.backgroundColor = .clear
         imageView.borderWidth = 3.0
         imageView.borderColor = .white
         imageView.cornerRadius = 45
         imageView.clipsToBounds = true
-       imageView.toInteraction()
+        imageView.toInteraction()
         imageView.toAutoLayout()
         return imageView
     }()
     private lazy var fullNameLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .lightGray
-        label.text = "Смурф"
+        label.text = "Aleksei Vidiakin"
         label.font = .systemFont(ofSize: 18, weight: .bold)
         label.textColor = .black
         label.toAutoLayout()
@@ -57,9 +52,9 @@ class ProfileHeaderView: UIView {
         button.backgroundColor = .systemBlue
         button.cornerRadius = 4
         button.titleLabel?.textColor = .white
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOpacity = 0.7
-        button.layer.shadowRadius = 4
+        button.shadowColor = .black
+        button.shadowOpacity = 0.7
+        button.shadowRadius = 4
         button.layer.shadowOffset = .init(width: 4, height: 4)
         button.setTitle("Show Status", for: .normal)
         button.clipsToBounds = true
@@ -69,11 +64,8 @@ class ProfileHeaderView: UIView {
         return button
     }()
     
-//    weak var delegate: ProfileHeaderViewProtocol?  // добавляем делегат
-    
     private lazy var textField: UITextField = {
         let textField = UITextField()
-    //    textField.isHidden = true
         textField.placeholder = statusLabel.text   //"Enter some status here"
         textField.textColor = .black
         textField.font = .systemFont(ofSize: 15, weight: .regular)
@@ -93,12 +85,10 @@ class ProfileHeaderView: UIView {
         super.init(frame: frame)
         self.drawSelf()
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapDismiss)))
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented") // нет установки XIB
-        
     }
     
     private func drawSelf() {
@@ -107,7 +97,6 @@ class ProfileHeaderView: UIView {
         
         self.stackLabelView.addArrangedSubview(self.fullNameLabel)
         self.stackLabelView.addArrangedSubview(self.statusLabel)
-        
         
         NSLayoutConstraint.activate([
             self.avatarImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
@@ -131,54 +120,42 @@ class ProfileHeaderView: UIView {
             self.setStatusButton.heightAnchor.constraint(equalToConstant: 50),
             
             self.setStatusButton.topAnchor.constraint(equalTo: self.textField.bottomAnchor, constant: 10),
-            
         ])
     }
     @objc private func handleTapDismiss(){
         textField.resignFirstResponder()
-        
     }
-    
     @objc private func buttonPressed(_ button: UIButton) {
         
-      button.isSelected = !button.isSelected
+        button.isSelected = !button.isSelected
         textField.isHidden = false
         guard let status = textField.text else {return}
- 
-        
-            if !status.isEmpty {
-                UIView.animate(withDuration: 0.5) {
-                    self.textField.text = self.statusLabel.text
-                    self.textField.text = .none
-                    button.isSelected = true
-                } completion: { _ in
-                }
+                
+        if !status.isEmpty {
+            UIView.animate(withDuration: 0.5) {
+                self.textField.text = self.statusLabel.text
+                self.textField.text = .none
+                button.isSelected = true
+            } completion: { _ in
             }
-            if status.isEmpty {
-             //   textField.shake()
-                textField.borderColor = .red
-                textField.borderWidth = 2
-                button.isSelected = false
-              
-            } else {
-                textField.borderColor = .black
-                textField.borderWidth = 0.5
+        }
+        if status.isEmpty {
+            //   textField.shake()
+            textField.borderColor = .red
+            textField.borderWidth = 2
+            button.isSelected = false
+            
+        } else {
+            textField.borderColor = .black
+            textField.borderWidth = 0.5
             endEditing(true)
-        
-        
+        }
     }
-    }
-
     @objc private func statusTextChanged (_ textField: UITextField) {
         
         statusText = textField.text!
         statusLabel.text = statusText
-        
-
-
-    
     }
-    
 }
 
 
@@ -186,7 +163,7 @@ class ProfileHeaderView: UIView {
 
 
 
- 
 
-    
+
+
 

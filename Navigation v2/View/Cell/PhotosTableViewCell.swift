@@ -8,7 +8,7 @@
 import UIKit
 
 class PhotosTableViewCell: UITableViewCell {
-        
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .white
@@ -18,7 +18,7 @@ class PhotosTableViewCell: UITableViewCell {
         label.textAlignment = NSTextAlignment.left
         label.toAutoLayout()
         return label
-}()
+    }()
     
     private lazy var rightArrow: UIImageView = {
         let rightArrow = UIImage(systemName: "arrow.right")?.withTintColor(.black, renderingMode: .alwaysOriginal)
@@ -27,7 +27,7 @@ class PhotosTableViewCell: UITableViewCell {
         imageView.clipsToBounds = true
         imageView.toAutoLayout()
         return imageView
-}()
+    }()
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.backgroundColor = .white
@@ -64,9 +64,9 @@ class PhotosTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-      
-
-}
+        
+        
+    }
     private func setupBackPhotoView() {
         contentView.addSubview(stackView)
         contentView.backgroundColor = .white
@@ -74,31 +74,31 @@ class PhotosTableViewCell: UITableViewCell {
         self.stackView.addArrangedSubview(self.photoStackView)
         self.infoStackView.addArrangedSubview(self.titleLabel)
         self.infoStackView.addArrangedSubview(self.rightArrow)
-      
+        
         for i in 0...3 {
             let image = UIImageView(image: UIImage(named: "\(photoNameArray[i])"))
             image.backgroundColor = .white
-//            Mark:- проверить необходимость
+            //            Mark:- проверить необходимость
             image.frame.size.height = (UIScreen.main.bounds.width - 48) / 4
             image.frame.size.width = image.frame.size.height
-//            __________
+            //            __________
             
             image.cornerRadius = 6
             image.clipsToBounds = true
             image.toAutoLayout()
             self.photoStackView.addArrangedSubview(image)
         }
-
+        
         NSLayoutConstraint.activate([
-
+            
             self.stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
             self.stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
             self.stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
             self.stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
-
+            
         ])
     }
-       
-   
+    
+    
 }
 

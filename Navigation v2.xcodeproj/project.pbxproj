@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		F5069AF0280114F600FAE0CE /* UIViewController+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5069AEF280114F600FAE0CE /* UIViewController+extensions.swift */; };
+		F5069AF22801436200FAE0CE /* PublicationsArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5069AF12801436200FAE0CE /* PublicationsArray.swift */; };
+		F5069AF62801482800FAE0CE /* StandartEmailPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5069AF52801482800FAE0CE /* StandartEmailPassword.swift */; };
 		F511CF3E27FC9CB400A9C00D /* DetailedPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F511CF3D27FC9CB400A9C00D /* DetailedPostViewController.swift */; };
 		F511CF4027FCA76300A9C00D /* PhotoNameArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = F511CF3F27FCA76300A9C00D /* PhotoNameArray.swift */; };
 		F53228ED27EB6D25005B8EFF /* UIView+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53228EC27EB6D25005B8EFF /* UIView+extensions.swift */; };
@@ -33,6 +35,8 @@
 
 /* Begin PBXFileReference section */
 		F5069AEF280114F600FAE0CE /* UIViewController+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+extensions.swift"; sourceTree = "<group>"; };
+		F5069AF12801436200FAE0CE /* PublicationsArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicationsArray.swift; sourceTree = "<group>"; };
+		F5069AF52801482800FAE0CE /* StandartEmailPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandartEmailPassword.swift; sourceTree = "<group>"; };
 		F511CF3D27FC9CB400A9C00D /* DetailedPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedPostViewController.swift; sourceTree = "<group>"; };
 		F511CF3F27FCA76300A9C00D /* PhotoNameArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoNameArray.swift; sourceTree = "<group>"; };
 		F53228EC27EB6D25005B8EFF /* UIView+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extensions.swift"; sourceTree = "<group>"; };
@@ -69,6 +73,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F5069AF32801477800FAE0CE /* Arrays */ = {
+			isa = PBXGroup;
+			children = (
+				F5069AF12801436200FAE0CE /* PublicationsArray.swift */,
+				F511CF3F27FCA76300A9C00D /* PhotoNameArray.swift */,
+			);
+			path = Arrays;
+			sourceTree = "<group>";
+		};
+		F5069AF42801479400FAE0CE /* Standart Email+Password */ = {
+			isa = PBXGroup;
+			children = (
+				F5069AF52801482800FAE0CE /* StandartEmailPassword.swift */,
+			);
+			path = "Standart Email+Password";
+			sourceTree = "<group>";
+		};
 		F511CF3C27FC9C9300A9C00D /* Detailed */ = {
 			isa = PBXGroup;
 			children = (
@@ -81,7 +102,6 @@
 			isa = PBXGroup;
 			children = (
 				F53228F027EB6D5E005B8EFF /* Setupable.swift */,
-				F511CF3F27FCA76300A9C00D /* PhotoNameArray.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -133,6 +153,8 @@
 				F574FC9127DE0FD90017550B /* LaunchScreen.storyboard */,
 				F574FC9427DE0FD90017550B /* Info.plist */,
 				F53228EB27EB6CBC005B8EFF /* Extensions */,
+				F5069AF42801479400FAE0CE /* Standart Email+Password */,
+				F5069AF32801477800FAE0CE /* Arrays */,
 				F53228EA27EB6CA8005B8EFF /* Protocols */,
 			);
 			path = "Navigation v2";
@@ -299,6 +321,7 @@
 			files = (
 				F5069AF0280114F600FAE0CE /* UIViewController+extensions.swift in Sources */,
 				F59D51C027EEB8C60015AE1A /* PhotosTableViewCell.swift in Sources */,
+				F5069AF62801482800FAE0CE /* StandartEmailPassword.swift in Sources */,
 				F59D51C527EEBA150015AE1A /* PhotosViewController.swift in Sources */,
 				F574FCAE27DE16030017550B /* PhotoView.swift in Sources */,
 				F574FCA627DE15020017550B /* PostViewController.swift in Sources */,
@@ -316,6 +339,7 @@
 				F574FCAA27DE155E0017550B /* ProfileViewController.swift in Sources */,
 				F59D51C227EEB8E00015AE1A /* PhotosCollectionViewCell.swift in Sources */,
 				F53228F127EB6D5E005B8EFF /* Setupable.swift in Sources */,
+				F5069AF22801436200FAE0CE /* PublicationsArray.swift in Sources */,
 				F574FC8927DE0FD80017550B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

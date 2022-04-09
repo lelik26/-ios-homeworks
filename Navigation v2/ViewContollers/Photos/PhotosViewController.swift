@@ -11,7 +11,7 @@ class PhotosViewController: UIViewController {
     
     
     private enum Constants {
-       
+        
         static let itemCount: CGFloat = 3
     }
     
@@ -31,7 +31,7 @@ class PhotosViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "DefaultCell")
-        collectionView.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: "CustomCell") // зарегистрировали ячейку и заполнили индефикатор и ниже переиспользуем ячейку
+        collectionView.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: "CustomCell")
         collectionView.toAutoLayout()
         return collectionView
     }()
@@ -49,27 +49,26 @@ class PhotosViewController: UIViewController {
         imageView.toAutoLayout()
         return imageView
     }()
-   
-   private lazy var alphaView: UIView = {
-       let view = UIView()
-       view.backgroundColor = .clear
-       view.toAutoLayout()
-       return view
-   }()
-   
-   // Mark: - создание кнопки крестик
-   private lazy var crossButton: UIButton = {
-       let button = UIButton()
-       button.cornerRadius = 20
-       button.alpha = 0
-       button.clipsToBounds = true
-       button.setImage(.init(systemName: "xmark.circle"), for: .normal)
-       button.addTarget(self, action: #selector(self.didTapCrossButton), for: .touchUpInside)
-       button.backgroundColor = .systemRed
-       button.toAutoLayout()
-       return button
-   }()
-   
+    
+    private lazy var alphaView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.toAutoLayout()
+        return view
+    }()
+    
+    private lazy var crossButton: UIButton = {
+        let button = UIButton()
+        button.cornerRadius = 20
+        button.alpha = 0
+        button.clipsToBounds = true
+        button.setImage(.init(systemName: "xmark.circle"), for: .normal)
+        button.addTarget(self, action: #selector(self.didTapCrossButton), for: .touchUpInside)
+        button.backgroundColor = .systemRed
+        button.toAutoLayout()
+        return button
+    }()
+    
     
     private let tapGestureRecogniger = UITapGestureRecognizer()
     private var isExpanded = false
@@ -89,7 +88,7 @@ class PhotosViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-       
+        
     }
     
     private func setupPhotoGallery() {
@@ -109,14 +108,14 @@ class PhotosViewController: UIViewController {
             
             forPhotoView.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor),
             forPhotoView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
-            forPhotoView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width), //UIScreen.main.bounds.width
+            forPhotoView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
             forPhotoView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
             
             photoImageView.centerXAnchor.constraint(equalTo: forPhotoView.centerXAnchor),
             photoImageView.centerYAnchor.constraint(equalTo: forPhotoView.centerYAnchor),
             photoImageView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
             photoImageView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
-           
+            
             alphaView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             alphaView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             alphaView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
@@ -126,13 +125,10 @@ class PhotosViewController: UIViewController {
             crossButton.trailingAnchor.constraint(equalTo: forPhotoView.trailingAnchor, constant: -10),
             crossButton.heightAnchor.constraint(equalToConstant: 40),
             crossButton.widthAnchor.constraint(equalToConstant: 40)
-            
-           
         ])
-        
     }
     private func itemSize (for width:  CGFloat, with spacing: CGFloat) -> CGSize {
-      
+        
         let itemWidth = (UIScreen.main.bounds.width / Constants.itemCount - 2 * spacing)
         return CGSize(width: itemWidth, height: itemWidth)
     }
@@ -150,8 +146,6 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photoNameArray.count
     }
-    
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let spacing = (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.minimumLineSpacing
         return self.itemSize(for: collectionView.frame.width, with: spacing ?? 0)
@@ -159,7 +153,6 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
     }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell", for: indexPath) as? PhotosCollectionViewCell else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DefaultCell", for: indexPath)
@@ -172,45 +165,34 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-       photoImageView.photoGalleryImageView.image =  UIImage(named: photoNameArray[indexPath.row])
-    
+        photoImageView.photoGalleryImageView.image =  UIImage(named: photoNameArray[indexPath.row])
         self.isExpanded.toggle()
         self.forPhotoView.alpha = self.isExpanded ? 1 : 0
-      
-
-    UIView.animate(withDuration: 0.5) {
-       // self.forPhotoView.alpha = self.isExpanded ? 1 : 0
-        self.alphaView.alpha = self.isExpanded ? 0.7 : 0
-        self.view.layoutIfNeeded()
-    } completion: { _ in
-    }
-
-    if self.isExpanded {
-        self.alphaView.isHidden = false
-       
-    }
-
-        UIView.animate(withDuration: 0.5, delay: 0.3) { //, delay: 0.3
         
-            self.crossButton.alpha = self.isExpanded ? 1 : 0
-        
-            self.crossButton.isHidden = false
- 
+        UIView.animate(withDuration: 0.5) {
+            self.alphaView.alpha = self.isExpanded ? 0.7 : 0
+            self.view.layoutIfNeeded()
         } completion: { _ in
-        self.crossButton.isHidden = !self.isExpanded
+        }
+        if self.isExpanded {
+            self.alphaView.isHidden = false
+        }
+        
+        UIView.animate(withDuration: 0.5, delay: 0.3) {
+            self.crossButton.alpha = self.isExpanded ? 1 : 0
+            self.crossButton.isHidden = false
+        } completion: { _ in
+            self.crossButton.isHidden = !self.isExpanded
+        }
     }
-    }
-
     @objc private func didTapCrossButton() {
-      
+        
         UIView.animate(withDuration: 0.5) {
             self.forPhotoView.alpha = self.isExpanded ? 0 : 1
             self.alphaView.alpha = self.isExpanded ? 0 : 0.7
             self.view.layoutIfNeeded()
-        } completion: { _ in
-
-        }
-
+        } completion: { _ in  }
+        
         UIView.animate(withDuration: 0.3) {
             self.crossButton.alpha = self.isExpanded ? 0 : 1
         } completion: { _ in
@@ -219,13 +201,13 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
         }
     }
 }
-   
 
-    
-       
-    
-   
-    
+
+
+
+
+
+
 
 
 
